@@ -19,6 +19,16 @@ public class StudentBean {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     
+    public StudentBean()
+    {
+        studentList= new ArrayList<Student>();
+    }
+    
+    public StudentBean(ArrayList<Student> studentList)
+    {
+        this.studentList= studentList;
+    }
+    
     public Student createStudent(String name)
     {
         Student aStudent = new Student(name,18, Gender.Male);

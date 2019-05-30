@@ -9,18 +9,16 @@ import BeanPackage.Student;
 import BeanPackage.StudentBean;
 import java.util.ArrayList;
 import javax.ejb.EJB;
-import javax.jws.WebService;
-import javax.ejb.Stateless;
 import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebService;
 
 /**
  *
  * @author MY PHU NGUYEN
  */
 @WebService(serviceName = "StudentBeanWebService")
-@Stateless()
 public class StudentBeanWebService {
     @EJB
     private StudentBean ejbRef;// Add business logic below. (Right-click in editor and choose

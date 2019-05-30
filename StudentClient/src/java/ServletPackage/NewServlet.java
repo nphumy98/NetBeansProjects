@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
-import webservicepackage.HelloWSService;
+import webservicepackage.Gender;
 import webservicepackage.Student;
 import webservicepackage.StudentBeanWebService_Service;
+
 
 /**
  *
  * @author MY PHU NGUYEN
  */
 public class NewServlet extends HttpServlet {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/StudentBeanWebService/StudentBeanWebService.wsdl")
-    private StudentBeanWebService_Service service_1;
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/StudentServer/HelloWSService.wsdl")
-    private HelloWSService service;
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/StudentServer/StudentBeanWebService.wsdl")
+    private StudentBeanWebService_Service service;
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,7 +39,9 @@ public class NewServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String result= sayHello("Jimmy");
+            plusStudent("Minh");
+            int size= plusStudent("Duc");
+           // Student aStudent= new Student("Minh", 12, Gender.MALE);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -47,7 +49,7 @@ public class NewServlet extends HttpServlet {
             out.println("<title>Servlet NewServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + result + "</h1>");
+            out.println("<h1>Servlet NewServlet at " + size + "</h1>");
             out.println("<p><a href=\"index.jsp\">Return to Home Page</a></p>");
             out.println("</body>");
             out.println("</html>");
@@ -93,39 +95,35 @@ public class NewServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String sayHello(java.lang.String arg0) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        webservicepackage.HelloWS port = service.getHelloWSPort();
-        return port.sayHello(arg0);
-    }
-
     private Student createStudent(java.lang.String name) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        webservicepackage.StudentBeanWebService port = service.getStudentBeanWebServicePort();
         return port.createStudent(name);
-    }
-
-    private int plusStudent(java.lang.String name) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
-        return port.plusStudent(name);
     }
 
     private java.util.List<webservicepackage.Student> getStudentList() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        webservicepackage.StudentBeanWebService port = service.getStudentBeanWebServicePort();
         return port.getStudentList();
+    }
+
+    private int plusStudent(java.lang.String name) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentBeanWebService port = service.getStudentBeanWebServicePort();
+        return port.plusStudent(name);
     }
 
     private void setStudentList(java.util.List<webservicepackage.Student> studentList) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        webservicepackage.StudentBeanWebService port = service.getStudentBeanWebServicePort();
         port.setStudentList(studentList);
     }
+
+    
+
 
 }

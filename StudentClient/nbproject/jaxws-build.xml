@@ -26,26 +26,10 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-HelloWSService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/HelloWSService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/HelloWSService" destdir="${build.generated.dir}/jax-wsCache/HelloWSService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/HelloWSService/wsdl/localhost_8080/StudentServer/HelloWSService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/StudentServer/HelloWSService?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/HelloWSService/wsdl/localhost_8080/StudentServer/HelloWSService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/HelloWSService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/HelloWSService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-HelloWSService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/webservicepackage"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/HelloWSService"/>
-    </target>
     <target name="wsimport-client-StudentBeanWebService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/StudentBeanWebService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/StudentBeanWebService" destdir="${build.generated.dir}/jax-wsCache/StudentBeanWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/StudentBeanWebService/wsdl/localhost_8080/StudentBeanWebService/StudentBeanWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/StudentBeanWebService/StudentBeanWebService?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/StudentBeanWebService/wsdl/localhost_8080/StudentBeanWebService/StudentBeanWebService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/StudentBeanWebService" destdir="${build.generated.dir}/jax-wsCache/StudentBeanWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/StudentBeanWebService/wsdl/localhost_8080/StudentServer/StudentBeanWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/StudentServer/StudentBeanWebService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/StudentBeanWebService/wsdl/localhost_8080/StudentServer/StudentBeanWebService.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/StudentBeanWebService"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
@@ -58,5 +42,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/webservicepackage"/>
         <delete dir="${build.generated.dir}/jax-wsCache/StudentBeanWebService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-HelloWSService, wsimport-client-StudentBeanWebService"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-StudentBeanWebService"/>
 </project>
