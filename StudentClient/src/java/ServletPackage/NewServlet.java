@@ -13,12 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 import webservicepackage.HelloWSService;
+import webservicepackage.Student;
+import webservicepackage.StudentBeanWebService_Service;
 
 /**
  *
  * @author MY PHU NGUYEN
  */
 public class NewServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/StudentBeanWebService/StudentBeanWebService.wsdl")
+    private StudentBeanWebService_Service service_1;
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/StudentServer/HelloWSService.wsdl")
     private HelloWSService service;
 
@@ -94,6 +98,34 @@ public class NewServlet extends HttpServlet {
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.HelloWS port = service.getHelloWSPort();
         return port.sayHello(arg0);
+    }
+
+    private Student createStudent(java.lang.String name) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        return port.createStudent(name);
+    }
+
+    private int plusStudent(java.lang.String name) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        return port.plusStudent(name);
+    }
+
+    private java.util.List<webservicepackage.Student> getStudentList() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        return port.getStudentList();
+    }
+
+    private void setStudentList(java.util.List<webservicepackage.Student> studentList) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentBeanWebService port = service_1.getStudentBeanWebServicePort();
+        port.setStudentList(studentList);
     }
 
 }

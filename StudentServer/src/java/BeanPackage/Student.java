@@ -5,10 +5,12 @@
  */
 package BeanPackage;
 
+
 /**
  *
  * @author MY PHU NGUYEN
  */
+
 public class Student {
     private static int studentNumber=0;
     private int studentID;
