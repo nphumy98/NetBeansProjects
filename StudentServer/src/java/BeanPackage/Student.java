@@ -5,6 +5,8 @@
  */
 package BeanPackage;
 
+import javax.naming.InitialContext;
+
 
 /**
  *
