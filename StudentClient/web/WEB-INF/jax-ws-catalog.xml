@@ -6,4 +6,6 @@
     <system systemId="http://localhost:8080/StudentBeanWebService/StudentBeanWebService?xsd=1" uri="wsdl/localhost_8080/StudentBeanWebService/StudentBeanWebService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/StudentServer/StudentBeanWebService?wsdl" uri="wsdl/localhost_8080/StudentServer/StudentBeanWebService.wsdl"/>
     <system systemId="http://localhost:8080/StudentServer/StudentBeanWebService?xsd=1" uri="wsdl/localhost_8080/StudentServer/StudentBeanWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/StudentServer/testWebService?wsdl" uri="wsdl/localhost_8080/StudentServer/testWebService.wsdl"/>
+    <system systemId="http://localhost:8080/StudentServer/testWebService?xsd=1" uri="wsdl/localhost_8080/StudentServer/testWebService.xsd_1.xsd"/>
 </catalog>
