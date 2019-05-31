@@ -36,5 +36,6 @@
         
             </table>
         </div>
+        <p><a href="index.jsp">Return to Home Page</a></p>
     </body>
 </html>
