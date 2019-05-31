@@ -60,25 +60,7 @@ public class NewServlet extends HttpServlet {
         request.setAttribute("STUDENT_LIST", studentList);
         //send to JSP page
         RequestDispatcher dispatcher= request.getRequestDispatcher("/studentList.jsp");
-        dispatcher.forward(request, response);
-//                PrintWriter out = response.getWriter()) {      
-//            addStudent("Minh");
-//            int size= addStudent("Duc");
-//            plusStudent("Minh");
-//            int size= plusStudent("Duc");
-           // Student aStudent= new Student("Minh", 12, Gender.MALE);
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet NewServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet NewServlet at " + size + "</h1>");
-//            out.println("<p><a href=\"index.jsp\">Return to Home Page</a></p>");
-//            out.println("</body>");
-//            out.println("</html>");
-        
+        dispatcher.forward(request, response); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
