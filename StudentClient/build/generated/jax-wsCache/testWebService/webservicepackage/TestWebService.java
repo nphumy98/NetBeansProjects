@@ -1,6 +1,7 @@
 
 package webservicepackage;
 
+import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -24,6 +25,18 @@ import javax.xml.ws.ResponseWrapper;
 })
 public interface TestWebService {
 
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<webservicepackage.Student>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getStudentList", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentList")
+    @ResponseWrapper(localName = "getStudentListResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentListResponse")
+    @Action(input = "http://WebServicePackage/testWebService/getStudentListRequest", output = "http://WebServicePackage/testWebService/getStudentListResponse")
+    public List<Student> getStudentList();
 
     /**
      * 

@@ -7,8 +7,11 @@ package ServletPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,25 +56,32 @@ public class NewServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {      
-            addStudent("Minh");
-            int size= addStudent("Duc");
+//        response.setContentType("text/html;charset=UTF-8");
+                     //get StudentList from DB
+        ArrayList<Student> studentList= (ArrayList<Student>) getStudentList_1();
+        //add StudentList to request
+        request.setAttribute("STUDENT_LIST", studentList);
+        //send to JSP page
+        RequestDispatcher dispatcher= request.getRequestDispatcher("/studentList.jsp");
+        dispatcher.forward(request, response);
+//                PrintWriter out = response.getWriter()) {      
+//            addStudent("Minh");
+//            int size= addStudent("Duc");
 //            plusStudent("Minh");
 //            int size= plusStudent("Duc");
            // Student aStudent= new Student("Minh", 12, Gender.MALE);
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + size + "</h1>");
-            out.println("<p><a href=\"index.jsp\">Return to Home Page</a></p>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet NewServlet</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet NewServlet at " + size + "</h1>");
+//            out.println("<p><a href=\"index.jsp\">Return to Home Page</a></p>");
+//            out.println("</body>");
+//            out.println("</html>");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -140,7 +150,9 @@ public class NewServlet extends HttpServlet {
         webservicepackage.StudentBeanWebService port = service.getStudentBeanWebServicePort();
         port.setStudentList(studentList);
     }
-
+    
+    
+    /// TEST WEB SERVICE
     private int initList() throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
@@ -161,4 +173,13 @@ public class NewServlet extends HttpServlet {
         webservicepackage.TestWebService port = service_1.getTestWebServicePort();
         return port.addStudent(arg0);
     }
+
+    private java.util.List<webservicepackage.Student> getStudentList_1() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.TestWebService port = service_1.getTestWebServicePort();
+        return port.getStudentList();
+    }
+        
+    
 }

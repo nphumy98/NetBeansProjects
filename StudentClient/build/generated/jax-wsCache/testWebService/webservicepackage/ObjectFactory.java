@@ -25,8 +25,10 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Exception_QNAME = new QName("http://WebServicePackage/", "Exception");
+    private final static QName _GetStudentListResponse_QNAME = new QName("http://WebServicePackage/", "getStudentListResponse");
     private final static QName _MakeStudentResponse_QNAME = new QName("http://WebServicePackage/", "makeStudentResponse");
     private final static QName _AddStudentResponse_QNAME = new QName("http://WebServicePackage/", "addStudentResponse");
+    private final static QName _GetStudentList_QNAME = new QName("http://WebServicePackage/", "getStudentList");
     private final static QName _InitList_QNAME = new QName("http://WebServicePackage/", "initList");
     private final static QName _AddStudent_QNAME = new QName("http://WebServicePackage/", "addStudent");
     private final static QName _InitListResponse_QNAME = new QName("http://WebServicePackage/", "initListResponse");
@@ -72,6 +74,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetStudentList }
+     * 
+     */
+    public GetStudentList createGetStudentList() {
+        return new GetStudentList();
+    }
+
+    /**
      * Create an instance of {@link AddStudentResponse }
      * 
      */
@@ -85,6 +95,14 @@ public class ObjectFactory {
      */
     public MakeStudentResponse createMakeStudentResponse() {
         return new MakeStudentResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetStudentListResponse }
+     * 
+     */
+    public GetStudentListResponse createGetStudentListResponse() {
+        return new GetStudentListResponse();
     }
 
     /**
@@ -113,6 +131,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStudentListResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getStudentListResponse")
+    public JAXBElement<GetStudentListResponse> createGetStudentListResponse(GetStudentListResponse value) {
+        return new JAXBElement<GetStudentListResponse>(_GetStudentListResponse_QNAME, GetStudentListResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link MakeStudentResponse }{@code >}}
      * 
      */
@@ -128,6 +155,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "addStudentResponse")
     public JAXBElement<AddStudentResponse> createAddStudentResponse(AddStudentResponse value) {
         return new JAXBElement<AddStudentResponse>(_AddStudentResponse_QNAME, AddStudentResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStudentList }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getStudentList")
+    public JAXBElement<GetStudentList> createGetStudentList(GetStudentList value) {
+        return new JAXBElement<GetStudentList>(_GetStudentList_QNAME, GetStudentList.class, null, value);
     }
 
     /**

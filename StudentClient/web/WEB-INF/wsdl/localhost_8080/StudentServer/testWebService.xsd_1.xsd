@@ -6,6 +6,10 @@
 
 <xs:element name="addStudentResponse" type="tns:addStudentResponse"/>
 
+<xs:element name="getStudentList" type="tns:getStudentList"/>
+
+<xs:element name="getStudentListResponse" type="tns:getStudentListResponse"/>
+
 <xs:element name="initList" type="tns:initList"/>
 
 <xs:element name="initListResponse" type="tns:initListResponse"/>
@@ -60,6 +64,16 @@
 <xs:element name="gender" type="tns:gender" minOccurs="0"/>
 <xs:element name="studentID" type="xs:int"/>
 <xs:element name="studentName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStudentList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getStudentListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:student" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

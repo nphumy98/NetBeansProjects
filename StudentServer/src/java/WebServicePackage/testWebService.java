@@ -110,6 +110,12 @@ public class testWebService {
         return studentList.size();
     }
     
+    @WebMethod(operationName = "getStudentList")
+    public ArrayList<Student> getStudentList()
+    {
+        return this.studentList;
+    }
+    
      private Connection connectDatabaseSchema() throws ClassNotFoundException, SQLException
      {
 
