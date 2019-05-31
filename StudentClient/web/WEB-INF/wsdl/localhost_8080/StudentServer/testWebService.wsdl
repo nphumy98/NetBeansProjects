@@ -16,11 +16,8 @@
 <message name="initListResponse">
 <part name="parameters" element="tns:initListResponse"/>
 </message>
-<message name="ClassNotFoundException">
-<part name="fault" element="tns:ClassNotFoundException"/>
-</message>
-<message name="SQLException">
-<part name="fault" element="tns:SQLException"/>
+<message name="Exception">
+<part name="fault" element="tns:Exception"/>
 </message>
 <message name="makeStudent">
 <part name="parameters" element="tns:makeStudent"/>
@@ -36,8 +33,7 @@
 <operation name="initList">
 <input wsam:Action="http://WebServicePackage/testWebService/initListRequest" message="tns:initList"/>
 <output wsam:Action="http://WebServicePackage/testWebService/initListResponse" message="tns:initListResponse"/>
-<fault message="tns:ClassNotFoundException" name="ClassNotFoundException" wsam:Action="http://WebServicePackage/testWebService/initList/Fault/ClassNotFoundException"/>
-<fault message="tns:SQLException" name="SQLException" wsam:Action="http://WebServicePackage/testWebService/initList/Fault/SQLException"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/testWebService/initList/Fault/Exception"/>
 </operation>
 <operation name="makeStudent">
 <input wsam:Action="http://WebServicePackage/testWebService/makeStudentRequest" message="tns:makeStudent"/>
@@ -63,11 +59,8 @@
 <output>
 <soap:body use="literal"/>
 </output>
-<fault name="ClassNotFoundException">
-<soap:fault name="ClassNotFoundException" use="literal"/>
-</fault>
-<fault name="SQLException">
-<soap:fault name="SQLException" use="literal"/>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
 </fault>
 </operation>
 <operation name="makeStudent">

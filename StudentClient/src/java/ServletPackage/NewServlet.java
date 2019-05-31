@@ -7,11 +7,14 @@ package ServletPackage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import webservicepackage.Exception_Exception;
 import webservicepackage.Gender;
 import webservicepackage.Student;
 import webservicepackage.StudentBeanWebService_Service;
@@ -32,7 +35,11 @@ public class NewServlet extends HttpServlet {
     @Override
     public void init()
     {
-        initList();
+        try {
+            initList();
+        } catch (Exception_Exception ex) {
+            Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -48,10 +55,10 @@ public class NewServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {      
-//            addStudent("Minh");
-//            int size= addStudent("Duc");
-            plusStudent("Minh");
-            int size= plusStudent("Duc");
+            addStudent("Minh");
+            int size= addStudent("Duc");
+//            plusStudent("Minh");
+//            int size= plusStudent("Duc");
            // Student aStudent= new Student("Minh", 12, Gender.MALE);
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -134,7 +141,7 @@ public class NewServlet extends HttpServlet {
         port.setStudentList(studentList);
     }
 
-    private int initList() {
+    private int initList() throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.TestWebService port = service_1.getTestWebServicePort();

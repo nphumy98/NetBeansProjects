@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 
 /**
  *
@@ -39,7 +38,7 @@ public class testWebService {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
      @WebMethod(operationName = "initList")
-    public int initList() throws ClassNotFoundException, SQLException
+    public int initList() throws Exception
     {
         this.studentList = new ArrayList<Student>();
         //Create Connection
