@@ -4,6 +4,9 @@
     <service name="StudentBeanWebService">
       <implementation-class>WebServicePackage.StudentBeanWebService</implementation-class>
     </service>
+    <service name="testWebService">
+      <implementation-class>WebServicePackage.testWebService</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
