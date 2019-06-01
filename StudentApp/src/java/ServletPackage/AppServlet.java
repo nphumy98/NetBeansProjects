@@ -60,10 +60,7 @@ public class AppServlet extends HttpServlet {
             receiver.setMessageListener(listener);  
               
             System.out.println("Receiver1 is ready, waiting for messages...");  
-            System.out.println("press Ctrl+c to shutdown...");  
-            while(true){                  
-                Thread.sleep(1000);  
-            }  
+            System.out.println("press Ctrl+c to shutdown...");
         }catch(Exception e){System.out.println(e);}
     }
     

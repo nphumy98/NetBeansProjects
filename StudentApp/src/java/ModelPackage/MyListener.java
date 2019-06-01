@@ -10,6 +10,7 @@ package ModelPackage;
  * @author MY PHU NGUYEN
  */
 import ServletPackage.AppServlet;
+import static java.lang.System.out;
 import javax.jms.*;  
 public class MyListener implements MessageListener {  
   
@@ -17,8 +18,8 @@ public class MyListener implements MessageListener {
         try{  
         TextMessage msg=(TextMessage)m;  
       
-        System.out.println("following message is received:"+msg.getText());
-            AppServlet.message=msg.getText();
+        AppServlet.message=msg.getText();
+        System.out.println(AppServlet.message);
         }catch(JMSException e){System.out.println(e);}  
     }  
 }
