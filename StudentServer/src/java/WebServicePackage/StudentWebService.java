@@ -121,12 +121,7 @@ public class StudentWebService {
         return studentList.size();
     }
     
-    @WebMethod(operationName = "getStudentList")
-    public ArrayList<Student> getStudentList()
-    {
-        return this.studentList;
-    }
-    
+   
 
     
      private Connection connectDatabaseSchema() throws ClassNotFoundException, SQLException
@@ -173,56 +168,87 @@ public class StudentWebService {
     private final String QUEUE_FACTORY_LOCATION = "myQueueConnectionFactory";
     private final String ANNOUNCE_QUEUE_LOCATION = "Announces";
     private final String NO_TARGET_INDICATOR = "[NO TARGET]";
-    
+
+    @WebMethod(operationName = "changePassword")
+    public boolean changePassword(int studentID, String newPassword) throws Exception {
+
+        String sql = "UPDATE " + tableName + " SET PASSWORD = '" + newPassword + "' WHERE STUDENTID = " + studentID;
+        System.out.println(sql);
+        Connection connection = this.connectDatabaseSchema();
+        Statement statement = connection.createStatement();
+        int count = statement.executeUpdate("UPDATE " + tableName + " SET PASSWORD = '" + newPassword + "' WHERE STUDENTID = " + studentID);
+        return count > 0;
+    }
+
     @WebMethod(operationName = "checkPassword")
-    public boolean checkPassword(int studentID, String password) throws Exception
-    {
-        Connection connection =this.connectDatabaseSchema();
-        
-        Statement statement =  connection.createStatement();
-        ResultSet rs=statement.executeQuery("SELECT * FROM "+tableName);
-        
-        while(rs.next()){
-            if(rs.getInt("STUDENTID")==studentID){
+    public boolean checkPassword(int studentID, String password) throws Exception {
+        Connection connection = this.connectDatabaseSchema();
+
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+
+        while (rs.next()) {
+            if (rs.getInt("STUDENTID") == studentID) {
                 return password.equals(rs.getString("PASSWORD"));
-               
+
             }
         }
         return false;
     }
-    
+
+    @WebMethod(operationName = "getStudentInformation")
+    public ArrayList<String> getStudentInformation(int studentID) throws Exception {
+        ArrayList<String> result = new ArrayList<>();
+        Connection connection = this.connectDatabaseSchema();
+
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+
+        while (rs.next()) {
+            if (rs.getInt("STUDENTID") == studentID) {
+                result.add(String.valueOf(rs.getInt("STUDENTID")));
+                result.add(rs.getString("NAME"));
+                result.add(String.valueOf(rs.getInt("AGE")));
+                result.add(rs.getString("GENDER"));
+                result.add(rs.getString("PASSWORD"));
+            }
+        }
+        return result;
+    }
+
     @WebMethod(operationName = "sentMessageToAnnounce")
-    public void sentMessageToAnnounce(int announcesID,String topic, String body) throws Exception {
-        String queueMessage = announcesID+"-"
-                +this.NO_TARGET_INDICATOR+"-"
-                +topic+"-"
-                +body;
+    public void sentMessageToAnnounce(int announcesID, String topic, String body) throws Exception {
+        String queueMessage = announcesID + "-"
+                + this.NO_TARGET_INDICATOR + "-"
+                + topic + "-"
+                + body;
         this.messageOut(queueMessage);
     }
-     @WebMethod(operationName = "sentMessageToAnnounceWithTarget")
-    public void sentMessageToAnnounceWithTarget(int announcesID,String Target,String topic, String body) throws Exception{
-        String queueMessage = announcesID+"-"
-                +Target+"-"
-                +topic+"-"
-                +body;
+
+    @WebMethod(operationName = "sentMessageToAnnounceWithTarget")
+    public void sentMessageToAnnounceWithTarget(int announcesID, String Target, String topic, String body) throws Exception {
+        String queueMessage = announcesID + "-"
+                + Target + "-"
+                + topic + "-"
+                + body;
         this.messageOut(queueMessage);
     }
-    
+
     @WebMethod(operationName = "announceDecode")
     public ArrayList<String> announceDecode(String singleMessage) throws Exception {
         ArrayList<String> decoded = new ArrayList<>();
         String[] parts = singleMessage.split("-");
-        for(String e : parts){
+        for (String e : parts) {
             decoded.add(e);
         }
-        return decoded;   
-        
+        return decoded;
+
     }
-    
+
     @WebMethod(operationName = "getAnnounce")
     public ArrayList<String> getAnnounce() throws Exception {
         System.out.println("all announces");
-        
+
         ArrayList<String> result = new ArrayList<>();
         InitialContext initialContext = new InitialContext();
         QueueConnectionFactory factory = (QueueConnectionFactory) initialContext.lookup(this.QUEUE_FACTORY_LOCATION);
@@ -254,11 +280,32 @@ public class StudentWebService {
         QueueConnection connection = factory.createQueueConnection();
         connection.start();
         QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-        Queue announceQueue = (Queue) initialContext.lookup(this.ANNOUNCE_QUEUE_LOCATION);    
+        Queue announceQueue = (Queue) initialContext.lookup(this.ANNOUNCE_QUEUE_LOCATION);
         QueueSender sender = session.createSender(announceQueue);
         TextMessage msg = session.createTextMessage(compeletedMessage);
-        sender.send(msg); 
+        sender.send(msg);
         connection.close();
-    }   
-}
+    }
 
+    @WebMethod(operationName = "getStudentList")
+    public ArrayList<Student> getStudentList() throws Exception {
+        ArrayList<Student> result = new ArrayList<>();
+        Connection connection = this.connectDatabaseSchema();
+
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
+
+        while (rs.next()) {
+            Student tempS = new Student(rs.getInt("STUDENTID"),
+                    rs.getString("NAME"),
+                    rs.getInt("AGE"),
+                    Gender.valueOf(rs.getString("GENDER")),
+                    rs.getString("PASSWORD"));
+
+            result.add(tempS);
+        };
+
+        return result;
+    }
+
+}

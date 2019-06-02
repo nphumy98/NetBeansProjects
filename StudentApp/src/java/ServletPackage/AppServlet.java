@@ -5,7 +5,7 @@
  */
 package ServletPackage;
 
-import ModelPackage.MyListener;
+//import ModelPackage.MyListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
 import webservicepackage.Exception_Exception;
 import webservicepackage.StudentWebService_Service;
@@ -41,8 +42,8 @@ public class AppServlet extends HttpServlet {
     public final String PAGE_TITLE = "Student login";
     private final String NO_TARGET_INDICATOR = "[NO TARGET]";
     
-    String userName;
-    String password;
+    private String userID;
+    private String password;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,37 +54,40 @@ public class AppServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        @Override
-    public void init()
-    {
-        try{  
-            //1) Create and start connection  
-            InitialContext ctx=new InitialContext();  
-            QueueConnectionFactory f=(QueueConnectionFactory)ctx.lookup("myQueueConnectionFactory");  
-            QueueConnection con=f.createQueueConnection();  
-            con.start();  
-            //2) create Queue session  
-            QueueSession ses=con.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);  
-            //3) get the Queue object  
-            Queue t=(Queue)ctx.lookup("myQueue");  
-            //4)create QueueReceiver  
-            QueueReceiver receiver=ses.createReceiver(t);  
-              
-            //5) create listener object  
-            MyListener listener=new MyListener();  
-              
-            //6) register the listener object with receiver  
-            receiver.setMessageListener(listener);  
-              
-            System.out.println("Receiver1 is ready, waiting for messages...");  
-            System.out.println("press Ctrl+c to shutdown...");
-        }catch(Exception e){System.out.println(e);}
-    }
-    
+//        @Override
+//    public void init()
+//    {
+//        try{  
+//            //1) Create and start connection  
+//            InitialContext ctx=new InitialContext();  
+//            QueueConnectionFactory f=(QueueConnectionFactory)ctx.lookup("myQueueConnectionFactory");  
+//            QueueConnection con=f.createQueueConnection();  
+//            con.start();  
+//            //2) create Queue session  
+//            QueueSession ses=con.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);  
+//            //3) get the Queue object  
+//            Queue t=(Queue)ctx.lookup("myQueue");  
+//            //4)create QueueReceiver  
+//            QueueReceiver receiver=ses.createReceiver(t);  
+//              
+//            //5) create listener object  
+//            MyListener listener=new MyListener();  
+//              
+//            //6) register the listener object with receiver  
+//            receiver.setMessageListener(listener);  
+//              
+//            System.out.println("Receiver1 is ready, waiting for messages...");  
+//            System.out.println("press Ctrl+c to shutdown...");
+//        }catch(Exception e){System.out.println(e);}
+//    }
+//    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        this.userID=null;
+        this.password=null;
           
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -98,7 +102,6 @@ public class AppServlet extends HttpServlet {
             out.println("User Password:  <input type='password' name='Password'>");
             out.println("<input type='submit' name='login' value='Login here'>");
             out.println("</form>");
-            out.println("<h1>Servlet AppServlet at " + this.message + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -133,7 +136,7 @@ public class AppServlet extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println(message);
-        this.userName = request.getParameter("UserID").toString();
+        this.userID = request.getParameter("UserID").toString();
         this.password = request.getParameter("Password").toString();
 //     
 //        try {
@@ -148,45 +151,79 @@ public class AppServlet extends HttpServlet {
         
         boolean pass = false;
         try {
-            pass = this.checkPassword(Integer.parseInt(userName), password);
+            pass = this.checkPassword(Integer.parseInt(userID), password);
         } catch (Exception_Exception ex) {
             Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        if(pass){
-             try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>"+this.PAGE_TITLE+"</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>"+this.PAGE_NAME+"</h1>");
-            out.println("<h1>Welcome back "+this.userName+"</h1>");
-            out.println("<h1>Announcement</h1>");
-            
+        }        
+        if (pass) {
+            ArrayList<String> singleStudent = null;
             try {
-            ArrayList<String> result = (ArrayList<String>) this.getAnnounce();
-            for(String e : result){
-                ArrayList<String> temp = (ArrayList<String>) this.announceDecode(e);
-                if(temp.get(1).equals(this.NO_TARGET_INDICATOR)||temp.get(1).equals(this.userName))
-                {
-                    out.println("<h2>"+temp.get(2)+"</h2>");
-                    out.println("<p>"+temp.get(3)+"</p>");
-                }
+                singleStudent = (ArrayList<String>) this.getStudentInformation(Integer.parseInt(this.userID));
+            } catch (Exception_Exception ex) {
+                Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch (Exception_Exception ex) {
-            Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-            
-            out.println("</body>");
-            out.println("</html>");
-             }
-        }else{
-        try (PrintWriter out = response.getWriter()) {
+
+            try (PrintWriter out = response.getWriter()) {
+                HttpSession session = request.getSession();
+                session.setAttribute("USERID", this.userID);
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>" + this.PAGE_TITLE + "</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Student account Information</h1>");
+                out.println("<h1>Welcome back " + singleStudent.get(1) + "</h1>");
+                out.println("<br>");
+                out.println("<h1>Your information</h1>");
+                out.println("<p>ID :" + singleStudent.get(0) + "</p>");
+                out.println("<p>Name :" + singleStudent.get(1) + "</p>");
+                out.println("<p>Age :" + singleStudent.get(2) + "</p>");
+                out.println("<p>Gender :" + singleStudent.get(3) + "</p>");
+                out.println("<p>Password :" + singleStudent.get(4) + "</p>");
+                out.println("<form action='http://localhost:8080/StudentApp/ChangePassword' method = 'Post'>");
+                out.println("<input type='submit' name='login' value='Change password'>");
+                out.println("</form>");
+                out.println("<form action='http://localhost:8080/StudentApp/AppServlet' method = 'Get'>");
+                out.println("<input type='submit' name='login' value='Logout'>");
+                out.println("</form>");
+                out.println("<br>");
+                out.println("<h1>Genaral Announcement</h1>");
+                try {
+                    ArrayList<String> result = (ArrayList<String>) this.getAnnounce();
+                    for (String e : result) {
+                        ArrayList<String> temp = (ArrayList<String>) this.announceDecode(e);
+                        if (temp.get(1).equals(this.NO_TARGET_INDICATOR)) {
+                            out.println("<h3>" + temp.get(2) + "</h3>");
+                            out.println("<p>" + temp.get(3) + "</p>");
+                        }
+                    }
+
+                } catch (Exception_Exception ex) {
+                    Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                out.println("<br>");
+                out.println("<h1>Spical Announcement</h1>");
+                try {
+                    ArrayList<String> result = (ArrayList<String>) this.getAnnounce();
+                    for (String e : result) {
+                        ArrayList<String> temp = (ArrayList<String>) this.announceDecode(e);
+                        if (temp.get(1).equals(this.userID)) {
+                            out.println("<h3>" + temp.get(2) + "</h3>");
+                            out.println("<p>" + temp.get(3) + "</p>");
+                        }
+                    }
+
+                } catch (Exception_Exception ex) {
+                    Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }              
+
+                out.println("</body>");
+                out.println("</html>");
+            }
+        } else {
+            try (PrintWriter out = response.getWriter()) {
              out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -200,7 +237,6 @@ public class AppServlet extends HttpServlet {
         }            
     }
         
-      //  processRequest(request, response);
     }
 
     /**
@@ -246,6 +282,13 @@ public class AppServlet extends HttpServlet {
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
         return port.announceDecode(arg0);
+    }
+
+    private java.util.List<java.lang.String> getStudentInformation(int arg0) throws Exception_Exception {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+        return port.getStudentInformation(arg0);
     }
 
 

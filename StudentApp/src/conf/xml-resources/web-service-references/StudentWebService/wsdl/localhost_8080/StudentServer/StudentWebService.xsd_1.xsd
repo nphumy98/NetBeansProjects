@@ -10,6 +10,10 @@
 
 <xs:element name="announceDecodeResponse" type="tns:announceDecodeResponse"/>
 
+<xs:element name="changePassword" type="tns:changePassword"/>
+
+<xs:element name="changePasswordResponse" type="tns:changePasswordResponse"/>
+
 <xs:element name="checkPassword" type="tns:checkPassword"/>
 
 <xs:element name="checkPasswordResponse" type="tns:checkPasswordResponse"/>
@@ -17,6 +21,10 @@
 <xs:element name="getAnnounce" type="tns:getAnnounce"/>
 
 <xs:element name="getAnnounceResponse" type="tns:getAnnounceResponse"/>
+
+<xs:element name="getStudentInformation" type="tns:getStudentInformation"/>
+
+<xs:element name="getStudentInformationResponse" type="tns:getStudentInformationResponse"/>
 
 <xs:element name="getStudentList" type="tns:getStudentList"/>
 
@@ -136,11 +144,36 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="changePassword">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changePasswordResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getAnnounce">
 <xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="getAnnounceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStudentInformation">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStudentInformationResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>

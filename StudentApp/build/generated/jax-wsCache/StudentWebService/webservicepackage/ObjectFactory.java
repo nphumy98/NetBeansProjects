@@ -29,10 +29,14 @@ public class ObjectFactory {
     private final static QName _AddStudentResponse_QNAME = new QName("http://WebServicePackage/", "addStudentResponse");
     private final static QName _AnnounceDecode_QNAME = new QName("http://WebServicePackage/", "announceDecode");
     private final static QName _AnnounceDecodeResponse_QNAME = new QName("http://WebServicePackage/", "announceDecodeResponse");
+    private final static QName _ChangePassword_QNAME = new QName("http://WebServicePackage/", "changePassword");
+    private final static QName _ChangePasswordResponse_QNAME = new QName("http://WebServicePackage/", "changePasswordResponse");
     private final static QName _CheckPassword_QNAME = new QName("http://WebServicePackage/", "checkPassword");
     private final static QName _CheckPasswordResponse_QNAME = new QName("http://WebServicePackage/", "checkPasswordResponse");
     private final static QName _GetAnnounce_QNAME = new QName("http://WebServicePackage/", "getAnnounce");
     private final static QName _GetAnnounceResponse_QNAME = new QName("http://WebServicePackage/", "getAnnounceResponse");
+    private final static QName _GetStudentInformation_QNAME = new QName("http://WebServicePackage/", "getStudentInformation");
+    private final static QName _GetStudentInformationResponse_QNAME = new QName("http://WebServicePackage/", "getStudentInformationResponse");
     private final static QName _GetStudentList_QNAME = new QName("http://WebServicePackage/", "getStudentList");
     private final static QName _GetStudentListResponse_QNAME = new QName("http://WebServicePackage/", "getStudentListResponse");
     private final static QName _InitList_QNAME = new QName("http://WebServicePackage/", "initList");
@@ -92,6 +96,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ChangePassword }
+     * 
+     */
+    public ChangePassword createChangePassword() {
+        return new ChangePassword();
+    }
+
+    /**
+     * Create an instance of {@link ChangePasswordResponse }
+     * 
+     */
+    public ChangePasswordResponse createChangePasswordResponse() {
+        return new ChangePasswordResponse();
+    }
+
+    /**
      * Create an instance of {@link CheckPassword }
      * 
      */
@@ -121,6 +141,22 @@ public class ObjectFactory {
      */
     public GetAnnounceResponse createGetAnnounceResponse() {
         return new GetAnnounceResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetStudentInformation }
+     * 
+     */
+    public GetStudentInformation createGetStudentInformation() {
+        return new GetStudentInformation();
+    }
+
+    /**
+     * Create an instance of {@link GetStudentInformationResponse }
+     * 
+     */
+    public GetStudentInformationResponse createGetStudentInformationResponse() {
+        return new GetStudentInformationResponse();
     }
 
     /**
@@ -277,6 +313,32 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ChangePassword }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ChangePassword }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "changePassword")
+    public JAXBElement<ChangePassword> createChangePassword(ChangePassword value) {
+        return new JAXBElement<ChangePassword>(_ChangePassword_QNAME, ChangePassword.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ChangePasswordResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ChangePasswordResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "changePasswordResponse")
+    public JAXBElement<ChangePasswordResponse> createChangePasswordResponse(ChangePasswordResponse value) {
+        return new JAXBElement<ChangePasswordResponse>(_ChangePasswordResponse_QNAME, ChangePasswordResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CheckPassword }{@code >}
      * 
      * @param value
@@ -326,6 +388,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnounceResponse")
     public JAXBElement<GetAnnounceResponse> createGetAnnounceResponse(GetAnnounceResponse value) {
         return new JAXBElement<GetAnnounceResponse>(_GetAnnounceResponse_QNAME, GetAnnounceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStudentInformation }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetStudentInformation }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getStudentInformation")
+    public JAXBElement<GetStudentInformation> createGetStudentInformation(GetStudentInformation value) {
+        return new JAXBElement<GetStudentInformation>(_GetStudentInformation_QNAME, GetStudentInformation.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStudentInformationResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetStudentInformationResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getStudentInformationResponse")
+    public JAXBElement<GetStudentInformationResponse> createGetStudentInformationResponse(GetStudentInformationResponse value) {
+        return new JAXBElement<GetStudentInformationResponse>(_GetStudentInformationResponse_QNAME, GetStudentInformationResponse.class, null, value);
     }
 
     /**

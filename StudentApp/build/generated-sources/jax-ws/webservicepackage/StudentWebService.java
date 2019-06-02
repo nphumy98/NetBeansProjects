@@ -45,6 +45,29 @@ public interface StudentWebService {
 
     /**
      * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns boolean
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "changePassword", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.ChangePassword")
+    @ResponseWrapper(localName = "changePasswordResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.ChangePasswordResponse")
+    @Action(input = "http://WebServicePackage/StudentWebService/changePasswordRequest", output = "http://WebServicePackage/StudentWebService/changePasswordResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/changePassword/Fault/Exception")
+    })
+    public boolean changePassword(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns webservicepackage.Student
@@ -102,13 +125,18 @@ public interface StudentWebService {
      * 
      * @return
      *     returns java.util.List<webservicepackage.Student>
+     * @throws Exception_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getStudentList", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentList")
     @ResponseWrapper(localName = "getStudentListResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentListResponse")
-    @Action(input = "http://WebServicePackage/StudentWebService/getStudentListRequest", output = "http://WebServicePackage/StudentWebService/getStudentListResponse")
-    public List<Student> getStudentList();
+    @Action(input = "http://WebServicePackage/StudentWebService/getStudentListRequest", output = "http://WebServicePackage/StudentWebService/getStudentListResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/getStudentList/Fault/Exception")
+    })
+    public List<Student> getStudentList()
+        throws Exception_Exception
+    ;
 
     /**
      * 
@@ -191,6 +219,26 @@ public interface StudentWebService {
         String arg1,
         @WebParam(name = "arg2", targetNamespace = "")
         String arg2)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<java.lang.String>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getStudentInformation", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentInformation")
+    @ResponseWrapper(localName = "getStudentInformationResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentInformationResponse")
+    @Action(input = "http://WebServicePackage/StudentWebService/getStudentInformationRequest", output = "http://WebServicePackage/StudentWebService/getStudentInformationResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/getStudentInformation/Fault/Exception")
+    })
+    public List<String> getStudentInformation(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0)
         throws Exception_Exception
     ;
 
