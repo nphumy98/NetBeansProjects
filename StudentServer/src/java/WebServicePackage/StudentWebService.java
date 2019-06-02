@@ -170,7 +170,6 @@ public class StudentWebService {
     
     
     //ZETING_____________
-    
     private final String QUEUE_FACTORY_LOCATION = "myQueueConnectionFactory";
     private final String ANNOUNCE_QUEUE_LOCATION = "Announces";
     private final String NO_TARGET_INDICATOR = "[NO TARGET]";
@@ -209,8 +208,19 @@ public class StudentWebService {
         this.messageOut(queueMessage);
     }
     
+    @WebMethod(operationName = "announceDecode")
+    public ArrayList<String> announceDecode(String singleMessage) throws Exception {
+        ArrayList<String> decoded = new ArrayList<>();
+        String[] parts = singleMessage.split("-");
+        for(String e : parts){
+            decoded.add(e);
+        }
+        return decoded;   
+        
+    }
+    
     @WebMethod(operationName = "getAnnounce")
-    public ArrayList getAnnounce() throws Exception {
+    public ArrayList<String> getAnnounce() throws Exception {
         System.out.println("all announces");
         
         ArrayList<String> result = new ArrayList<>();

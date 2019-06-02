@@ -27,6 +27,8 @@ public class ObjectFactory {
     private final static QName _Exception_QNAME = new QName("http://WebServicePackage/", "Exception");
     private final static QName _AddStudent_QNAME = new QName("http://WebServicePackage/", "addStudent");
     private final static QName _AddStudentResponse_QNAME = new QName("http://WebServicePackage/", "addStudentResponse");
+    private final static QName _AnnounceDecode_QNAME = new QName("http://WebServicePackage/", "announceDecode");
+    private final static QName _AnnounceDecodeResponse_QNAME = new QName("http://WebServicePackage/", "announceDecodeResponse");
     private final static QName _CheckPassword_QNAME = new QName("http://WebServicePackage/", "checkPassword");
     private final static QName _CheckPasswordResponse_QNAME = new QName("http://WebServicePackage/", "checkPasswordResponse");
     private final static QName _GetAnnounce_QNAME = new QName("http://WebServicePackage/", "getAnnounce");
@@ -71,6 +73,22 @@ public class ObjectFactory {
      */
     public AddStudentResponse createAddStudentResponse() {
         return new AddStudentResponse();
+    }
+
+    /**
+     * Create an instance of {@link AnnounceDecode }
+     * 
+     */
+    public AnnounceDecode createAnnounceDecode() {
+        return new AnnounceDecode();
+    }
+
+    /**
+     * Create an instance of {@link AnnounceDecodeResponse }
+     * 
+     */
+    public AnnounceDecodeResponse createAnnounceDecodeResponse() {
+        return new AnnounceDecodeResponse();
     }
 
     /**
@@ -230,6 +248,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "addStudentResponse")
     public JAXBElement<AddStudentResponse> createAddStudentResponse(AddStudentResponse value) {
         return new JAXBElement<AddStudentResponse>(_AddStudentResponse_QNAME, AddStudentResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AnnounceDecode }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AnnounceDecode }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "announceDecode")
+    public JAXBElement<AnnounceDecode> createAnnounceDecode(AnnounceDecode value) {
+        return new JAXBElement<AnnounceDecode>(_AnnounceDecode_QNAME, AnnounceDecode.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AnnounceDecodeResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link AnnounceDecodeResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "announceDecodeResponse")
+    public JAXBElement<AnnounceDecodeResponse> createAnnounceDecodeResponse(AnnounceDecodeResponse value) {
+        return new JAXBElement<AnnounceDecodeResponse>(_AnnounceDecodeResponse_QNAME, AnnounceDecodeResponse.class, null, value);
     }
 
     /**

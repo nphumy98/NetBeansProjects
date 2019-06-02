@@ -8,6 +8,7 @@ package ServletPackage;
 import ModelPackage.MyListener;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Queue;
@@ -38,7 +39,7 @@ public class AppServlet extends HttpServlet {
     public static String message="hehe";
     public final String PAGE_NAME = "Student login";
     public final String PAGE_TITLE = "Student login";
-    
+    private final String NO_TARGET_INDICATOR = "[NO TARGET]";
     
     String userName;
     String password;
@@ -134,6 +135,17 @@ public class AppServlet extends HttpServlet {
         System.out.println(message);
         this.userName = request.getParameter("UserID").toString();
         this.password = request.getParameter("Password").toString();
+//     
+//        try {
+//            this.sentMessageToAnnounce(1, "TEST Annount 2without target", "BODY Message");
+//            this.sentMessageToAnnounceWithTarget(2, "1", "TEST Annount 2 with target", "Message body");
+//            this.sentMessageToAnnounceWithTarget(3, "3", "TEST Annount 3 target not hit", "Message body");
+//        } catch (Exception_Exception ex) {
+//            Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        
+        
         boolean pass = false;
         try {
             pass = this.checkPassword(Integer.parseInt(userName), password);
@@ -152,6 +164,23 @@ public class AppServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>"+this.PAGE_NAME+"</h1>");
             out.println("<h1>Welcome back "+this.userName+"</h1>");
+            out.println("<h1>Announcement</h1>");
+            
+            try {
+            ArrayList<String> result = (ArrayList<String>) this.getAnnounce();
+            for(String e : result){
+                ArrayList<String> temp = (ArrayList<String>) this.announceDecode(e);
+                if(temp.get(1).equals(this.NO_TARGET_INDICATOR)||temp.get(1).equals(this.userName))
+                {
+                    out.println("<h2>"+temp.get(2)+"</h2>");
+                    out.println("<p>"+temp.get(3)+"</p>");
+                }
+            }
+            
+        } catch (Exception_Exception ex) {
+            Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
             
             out.println("</body>");
             out.println("</html>");
@@ -190,6 +219,35 @@ public class AppServlet extends HttpServlet {
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
         return port.checkPassword(arg0, arg1);
     }
+
+    private void sentMessageToAnnounce(int arg0, java.lang.String arg1, java.lang.String arg2) throws Exception_Exception {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+        port.sentMessageToAnnounce(arg0, arg1, arg2);
+    }
+
+    private java.util.List<java.lang.String> getAnnounce() throws Exception_Exception {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+        return port.getAnnounce();
+    }
+
+    private void sentMessageToAnnounceWithTarget(int arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3) throws Exception_Exception {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+        port.sentMessageToAnnounceWithTarget(arg0, arg1, arg2, arg3);
+    }
+
+    private java.util.List<java.lang.String> announceDecode(java.lang.String arg0) throws Exception_Exception {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+        return port.announceDecode(arg0);
+    }
+
 
 
 }

@@ -43,6 +43,12 @@
 <message name="addStudentResponse">
 <part name="parameters" element="tns:addStudentResponse"/>
 </message>
+<message name="announceDecode">
+<part name="parameters" element="tns:announceDecode"/>
+</message>
+<message name="announceDecodeResponse">
+<part name="parameters" element="tns:announceDecodeResponse"/>
+</message>
 <message name="sentMessageToAnnounceWithTarget">
 <part name="parameters" element="tns:sentMessageToAnnounceWithTarget"/>
 </message>
@@ -82,6 +88,11 @@
 <operation name="addStudent">
 <input wsam:Action="http://WebServicePackage/StudentWebService/addStudentRequest" message="tns:addStudent"/>
 <output wsam:Action="http://WebServicePackage/StudentWebService/addStudentResponse" message="tns:addStudentResponse"/>
+</operation>
+<operation name="announceDecode">
+<input wsam:Action="http://WebServicePackage/StudentWebService/announceDecodeRequest" message="tns:announceDecode"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/announceDecodeResponse" message="tns:announceDecodeResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/announceDecode/Fault/Exception"/>
 </operation>
 <operation name="sentMessageToAnnounceWithTarget">
 <input wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTargetRequest" message="tns:sentMessageToAnnounceWithTarget"/>
@@ -158,6 +169,18 @@
 <output>
 <soap:body use="literal"/>
 </output>
+</operation>
+<operation name="announceDecode">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
 </operation>
 <operation name="sentMessageToAnnounceWithTarget">
 <soap:operation soapAction=""/>

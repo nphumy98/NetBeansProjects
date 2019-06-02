@@ -29,7 +29,7 @@ public interface StudentWebService {
     /**
      * 
      * @return
-     *     returns java.util.List<java.lang.Object>
+     *     returns java.util.List<java.lang.String>
      * @throws Exception_Exception
      */
     @WebMethod
@@ -39,7 +39,7 @@ public interface StudentWebService {
     @Action(input = "http://WebServicePackage/StudentWebService/getAnnounceRequest", output = "http://WebServicePackage/StudentWebService/getAnnounceResponse", fault = {
         @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/getAnnounce/Fault/Exception")
     })
-    public List<Object> getAnnounce()
+    public List<String> getAnnounce()
         throws Exception_Exception
     ;
 
@@ -124,6 +124,26 @@ public interface StudentWebService {
     public int addStudent(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<java.lang.String>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "announceDecode", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.AnnounceDecode")
+    @ResponseWrapper(localName = "announceDecodeResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.AnnounceDecodeResponse")
+    @Action(input = "http://WebServicePackage/StudentWebService/announceDecodeRequest", output = "http://WebServicePackage/StudentWebService/announceDecodeResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/announceDecode/Fault/Exception")
+    })
+    public List<String> announceDecode(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0)
+        throws Exception_Exception
+    ;
 
     /**
      * 
