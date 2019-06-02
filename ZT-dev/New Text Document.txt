@@ -3,6 +3,7 @@ UserDB---
 	|-Insert-Name-Password-Type-Gender-Paper	[Insert new user]
 	|-Find-Name					[Get ID by Name]
 	|-View						[View all user]
+	|-Detail-ID					[See detail by id]
 Action---
 	|-Announce-Topic-Body				[Send a announce to announce queue]
 	|-View						[See all announce in queue]
