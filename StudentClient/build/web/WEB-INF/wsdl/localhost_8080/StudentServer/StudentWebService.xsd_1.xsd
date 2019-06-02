@@ -32,6 +32,7 @@
 <xs:sequence>
 <xs:element name="age" type="xs:int"/>
 <xs:element name="gender" type="tns:gender" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
 <xs:element name="studentID" type="xs:int"/>
 <xs:element name="studentName" type="xs:string" minOccurs="0"/>
 </xs:sequence>

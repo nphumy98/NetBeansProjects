@@ -19,8 +19,9 @@ public class Student {
     private String studentName;
     private int age;
     private Gender gender;
+    private String password;
     
-    public Student(int studentID, String studentName, int age, Gender gender)
+    public Student(int studentID, String studentName, int age, Gender gender, String password)
     {
         this.studentID= studentID;
         if (studentID>studentNumber)
@@ -30,6 +31,7 @@ public class Student {
         this.studentName= studentName;
         this.age=age;
         this.gender=gender;
+        this.password=password;
     }
     
     public Student (String studentName, int age, Gender gender)
@@ -39,6 +41,7 @@ public class Student {
         this.gender=gender;
         studentNumber++;
         this.studentID=studentNumber;
+        this.password="123";
     }
     
     //getter and setter
@@ -81,4 +84,14 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    
 }

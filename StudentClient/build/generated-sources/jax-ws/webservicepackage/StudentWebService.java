@@ -43,6 +43,23 @@ public interface StudentWebService {
 
     /**
      * 
+     * @return
+     *     returns int
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "initList", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitList")
+    @ResponseWrapper(localName = "initListResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitListResponse")
+    @Action(input = "http://WebServicePackage/StudentWebService/initListRequest", output = "http://WebServicePackage/StudentWebService/initListResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/initList/Fault/Exception")
+    })
+    public int initList()
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns int
@@ -67,22 +84,5 @@ public interface StudentWebService {
     @ResponseWrapper(localName = "getStudentListResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.GetStudentListResponse")
     @Action(input = "http://WebServicePackage/StudentWebService/getStudentListRequest", output = "http://WebServicePackage/StudentWebService/getStudentListResponse")
     public List<Student> getStudentList();
-
-    /**
-     * 
-     * @return
-     *     returns int
-     * @throws Exception_Exception
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "initList", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitList")
-    @ResponseWrapper(localName = "initListResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitListResponse")
-    @Action(input = "http://WebServicePackage/StudentWebService/initListRequest", output = "http://WebServicePackage/StudentWebService/initListResponse", fault = {
-        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/StudentWebService/initList/Fault/Exception")
-    })
-    public int initList()
-        throws Exception_Exception
-    ;
 
 }
