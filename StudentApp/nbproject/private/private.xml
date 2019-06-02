@@ -13,9 +13,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/luoze/Documents/GitHub/NetBeansProjects/StudentApp/web/index.jsp</file>
+            <file>file:/C:/Users/luoze/Documents/GitHub/NetBeansProjects/StudentApp/src/conf/xml-resources/web-service-references/StudentWebService/wsdl/localhost_8080/StudentServer/StudentWebService.wsdl</file>
             <file>file:/C:/Users/luoze/Documents/GitHub/NetBeansProjects/StudentApp/src/java/ModelPackage/MyListener.java</file>
             <file>file:/C:/Users/luoze/Documents/GitHub/NetBeansProjects/StudentApp/src/java/ServletPackage/AppServlet.java</file>
             <file>file:/C:/Users/luoze/Documents/GitHub/NetBeansProjects/StudentApp/web/Announcement.jsp</file>
+            <file>file:/C:/Users/luoze/Documents/GitHub/NetBeansProjects/StudentApp/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

@@ -29,12 +29,18 @@ public class ObjectFactory {
     private final static QName _AddStudentResponse_QNAME = new QName("http://WebServicePackage/", "addStudentResponse");
     private final static QName _CheckPassword_QNAME = new QName("http://WebServicePackage/", "checkPassword");
     private final static QName _CheckPasswordResponse_QNAME = new QName("http://WebServicePackage/", "checkPasswordResponse");
+    private final static QName _GetAnnounce_QNAME = new QName("http://WebServicePackage/", "getAnnounce");
+    private final static QName _GetAnnounceResponse_QNAME = new QName("http://WebServicePackage/", "getAnnounceResponse");
     private final static QName _GetStudentList_QNAME = new QName("http://WebServicePackage/", "getStudentList");
     private final static QName _GetStudentListResponse_QNAME = new QName("http://WebServicePackage/", "getStudentListResponse");
     private final static QName _InitList_QNAME = new QName("http://WebServicePackage/", "initList");
     private final static QName _InitListResponse_QNAME = new QName("http://WebServicePackage/", "initListResponse");
     private final static QName _MakeStudent_QNAME = new QName("http://WebServicePackage/", "makeStudent");
     private final static QName _MakeStudentResponse_QNAME = new QName("http://WebServicePackage/", "makeStudentResponse");
+    private final static QName _SentMessageToAnnounce_QNAME = new QName("http://WebServicePackage/", "sentMessageToAnnounce");
+    private final static QName _SentMessageToAnnounceResponse_QNAME = new QName("http://WebServicePackage/", "sentMessageToAnnounceResponse");
+    private final static QName _SentMessageToAnnounceWithTarget_QNAME = new QName("http://WebServicePackage/", "sentMessageToAnnounceWithTarget");
+    private final static QName _SentMessageToAnnounceWithTargetResponse_QNAME = new QName("http://WebServicePackage/", "sentMessageToAnnounceWithTargetResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservicepackage
@@ -84,6 +90,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAnnounce }
+     * 
+     */
+    public GetAnnounce createGetAnnounce() {
+        return new GetAnnounce();
+    }
+
+    /**
+     * Create an instance of {@link GetAnnounceResponse }
+     * 
+     */
+    public GetAnnounceResponse createGetAnnounceResponse() {
+        return new GetAnnounceResponse();
+    }
+
+    /**
      * Create an instance of {@link GetStudentList }
      * 
      */
@@ -129,6 +151,38 @@ public class ObjectFactory {
      */
     public MakeStudentResponse createMakeStudentResponse() {
         return new MakeStudentResponse();
+    }
+
+    /**
+     * Create an instance of {@link SentMessageToAnnounce }
+     * 
+     */
+    public SentMessageToAnnounce createSentMessageToAnnounce() {
+        return new SentMessageToAnnounce();
+    }
+
+    /**
+     * Create an instance of {@link SentMessageToAnnounceResponse }
+     * 
+     */
+    public SentMessageToAnnounceResponse createSentMessageToAnnounceResponse() {
+        return new SentMessageToAnnounceResponse();
+    }
+
+    /**
+     * Create an instance of {@link SentMessageToAnnounceWithTarget }
+     * 
+     */
+    public SentMessageToAnnounceWithTarget createSentMessageToAnnounceWithTarget() {
+        return new SentMessageToAnnounceWithTarget();
+    }
+
+    /**
+     * Create an instance of {@link SentMessageToAnnounceWithTargetResponse }
+     * 
+     */
+    public SentMessageToAnnounceWithTargetResponse createSentMessageToAnnounceWithTargetResponse() {
+        return new SentMessageToAnnounceWithTargetResponse();
     }
 
     /**
@@ -202,6 +256,32 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "checkPasswordResponse")
     public JAXBElement<CheckPasswordResponse> createCheckPasswordResponse(CheckPasswordResponse value) {
         return new JAXBElement<CheckPasswordResponse>(_CheckPasswordResponse_QNAME, CheckPasswordResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAnnounce }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetAnnounce }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnounce")
+    public JAXBElement<GetAnnounce> createGetAnnounce(GetAnnounce value) {
+        return new JAXBElement<GetAnnounce>(_GetAnnounce_QNAME, GetAnnounce.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAnnounceResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link GetAnnounceResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnounceResponse")
+    public JAXBElement<GetAnnounceResponse> createGetAnnounceResponse(GetAnnounceResponse value) {
+        return new JAXBElement<GetAnnounceResponse>(_GetAnnounceResponse_QNAME, GetAnnounceResponse.class, null, value);
     }
 
     /**
@@ -280,6 +360,58 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "makeStudentResponse")
     public JAXBElement<MakeStudentResponse> createMakeStudentResponse(MakeStudentResponse value) {
         return new JAXBElement<MakeStudentResponse>(_MakeStudentResponse_QNAME, MakeStudentResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounce }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounce }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "sentMessageToAnnounce")
+    public JAXBElement<SentMessageToAnnounce> createSentMessageToAnnounce(SentMessageToAnnounce value) {
+        return new JAXBElement<SentMessageToAnnounce>(_SentMessageToAnnounce_QNAME, SentMessageToAnnounce.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounceResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounceResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "sentMessageToAnnounceResponse")
+    public JAXBElement<SentMessageToAnnounceResponse> createSentMessageToAnnounceResponse(SentMessageToAnnounceResponse value) {
+        return new JAXBElement<SentMessageToAnnounceResponse>(_SentMessageToAnnounceResponse_QNAME, SentMessageToAnnounceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounceWithTarget }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounceWithTarget }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "sentMessageToAnnounceWithTarget")
+    public JAXBElement<SentMessageToAnnounceWithTarget> createSentMessageToAnnounceWithTarget(SentMessageToAnnounceWithTarget value) {
+        return new JAXBElement<SentMessageToAnnounceWithTarget>(_SentMessageToAnnounceWithTarget_QNAME, SentMessageToAnnounceWithTarget.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounceWithTargetResponse }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SentMessageToAnnounceWithTargetResponse }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "sentMessageToAnnounceWithTargetResponse")
+    public JAXBElement<SentMessageToAnnounceWithTargetResponse> createSentMessageToAnnounceWithTargetResponse(SentMessageToAnnounceWithTargetResponse value) {
+        return new JAXBElement<SentMessageToAnnounceWithTargetResponse>(_SentMessageToAnnounceWithTargetResponse_QNAME, SentMessageToAnnounceWithTargetResponse.class, null, value);
     }
 
 }

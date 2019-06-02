@@ -4,32 +4,14 @@
 <xsd:import namespace="http://WebServicePackage/" schemaLocation="http://localhost:8080/StudentServer/StudentWebService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getStudentList">
-<part name="parameters" element="tns:getStudentList"/>
+<message name="getAnnounce">
+<part name="parameters" element="tns:getAnnounce"/>
 </message>
-<message name="getStudentListResponse">
-<part name="parameters" element="tns:getStudentListResponse"/>
-</message>
-<message name="initList">
-<part name="parameters" element="tns:initList"/>
-</message>
-<message name="initListResponse">
-<part name="parameters" element="tns:initListResponse"/>
+<message name="getAnnounceResponse">
+<part name="parameters" element="tns:getAnnounceResponse"/>
 </message>
 <message name="Exception">
 <part name="fault" element="tns:Exception"/>
-</message>
-<message name="checkPassword">
-<part name="parameters" element="tns:checkPassword"/>
-</message>
-<message name="checkPasswordResponse">
-<part name="parameters" element="tns:checkPasswordResponse"/>
-</message>
-<message name="addStudent">
-<part name="parameters" element="tns:addStudent"/>
-</message>
-<message name="addStudentResponse">
-<part name="parameters" element="tns:addStudentResponse"/>
 </message>
 <message name="makeStudent">
 <part name="parameters" element="tns:makeStudent"/>
@@ -37,32 +19,84 @@
 <message name="makeStudentResponse">
 <part name="parameters" element="tns:makeStudentResponse"/>
 </message>
+<message name="checkPassword">
+<part name="parameters" element="tns:checkPassword"/>
+</message>
+<message name="checkPasswordResponse">
+<part name="parameters" element="tns:checkPasswordResponse"/>
+</message>
+<message name="initList">
+<part name="parameters" element="tns:initList"/>
+</message>
+<message name="initListResponse">
+<part name="parameters" element="tns:initListResponse"/>
+</message>
+<message name="getStudentList">
+<part name="parameters" element="tns:getStudentList"/>
+</message>
+<message name="getStudentListResponse">
+<part name="parameters" element="tns:getStudentListResponse"/>
+</message>
+<message name="addStudent">
+<part name="parameters" element="tns:addStudent"/>
+</message>
+<message name="addStudentResponse">
+<part name="parameters" element="tns:addStudentResponse"/>
+</message>
+<message name="sentMessageToAnnounceWithTarget">
+<part name="parameters" element="tns:sentMessageToAnnounceWithTarget"/>
+</message>
+<message name="sentMessageToAnnounceWithTargetResponse">
+<part name="parameters" element="tns:sentMessageToAnnounceWithTargetResponse"/>
+</message>
+<message name="sentMessageToAnnounce">
+<part name="parameters" element="tns:sentMessageToAnnounce"/>
+</message>
+<message name="sentMessageToAnnounceResponse">
+<part name="parameters" element="tns:sentMessageToAnnounceResponse"/>
+</message>
 <portType name="StudentWebService">
-<operation name="getStudentList">
-<input wsam:Action="http://WebServicePackage/StudentWebService/getStudentListRequest" message="tns:getStudentList"/>
-<output wsam:Action="http://WebServicePackage/StudentWebService/getStudentListResponse" message="tns:getStudentListResponse"/>
+<operation name="getAnnounce">
+<input wsam:Action="http://WebServicePackage/StudentWebService/getAnnounceRequest" message="tns:getAnnounce"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/getAnnounceResponse" message="tns:getAnnounceResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/getAnnounce/Fault/Exception"/>
+</operation>
+<operation name="makeStudent">
+<input wsam:Action="http://WebServicePackage/StudentWebService/makeStudentRequest" message="tns:makeStudent"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/makeStudentResponse" message="tns:makeStudentResponse"/>
+</operation>
+<operation name="checkPassword">
+<input wsam:Action="http://WebServicePackage/StudentWebService/checkPasswordRequest" message="tns:checkPassword"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/checkPasswordResponse" message="tns:checkPasswordResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/checkPassword/Fault/Exception"/>
 </operation>
 <operation name="initList">
 <input wsam:Action="http://WebServicePackage/StudentWebService/initListRequest" message="tns:initList"/>
 <output wsam:Action="http://WebServicePackage/StudentWebService/initListResponse" message="tns:initListResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/initList/Fault/Exception"/>
 </operation>
-<operation name="checkPassword">
-<input wsam:Action="http://WebServicePackage/StudentWebService/checkPasswordRequest" message="tns:checkPassword"/>
-<output wsam:Action="http://WebServicePackage/StudentWebService/checkPasswordResponse" message="tns:checkPasswordResponse"/>
+<operation name="getStudentList">
+<input wsam:Action="http://WebServicePackage/StudentWebService/getStudentListRequest" message="tns:getStudentList"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/getStudentListResponse" message="tns:getStudentListResponse"/>
 </operation>
 <operation name="addStudent">
 <input wsam:Action="http://WebServicePackage/StudentWebService/addStudentRequest" message="tns:addStudent"/>
 <output wsam:Action="http://WebServicePackage/StudentWebService/addStudentResponse" message="tns:addStudentResponse"/>
 </operation>
-<operation name="makeStudent">
-<input wsam:Action="http://WebServicePackage/StudentWebService/makeStudentRequest" message="tns:makeStudent"/>
-<output wsam:Action="http://WebServicePackage/StudentWebService/makeStudentResponse" message="tns:makeStudentResponse"/>
+<operation name="sentMessageToAnnounceWithTarget">
+<input wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTargetRequest" message="tns:sentMessageToAnnounceWithTarget"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTargetResponse" message="tns:sentMessageToAnnounceWithTargetResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTarget/Fault/Exception"/>
+</operation>
+<operation name="sentMessageToAnnounce">
+<input wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceRequest" message="tns:sentMessageToAnnounce"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceResponse" message="tns:sentMessageToAnnounceResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounce/Fault/Exception"/>
 </operation>
 </portType>
 <binding name="StudentWebServicePortBinding" type="tns:StudentWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getStudentList">
+<operation name="getAnnounce">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -70,6 +104,30 @@
 <output>
 <soap:body use="literal"/>
 </output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
+</operation>
+<operation name="makeStudent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkPassword">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
 </operation>
 <operation name="initList">
 <soap:operation soapAction=""/>
@@ -83,7 +141,7 @@
 <soap:fault name="Exception" use="literal"/>
 </fault>
 </operation>
-<operation name="checkPassword">
+<operation name="getStudentList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -101,7 +159,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="makeStudent">
+<operation name="sentMessageToAnnounceWithTarget">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -109,6 +167,21 @@
 <output>
 <soap:body use="literal"/>
 </output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
+</operation>
+<operation name="sentMessageToAnnounce">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
 </operation>
 </binding>
 <service name="StudentWebService">

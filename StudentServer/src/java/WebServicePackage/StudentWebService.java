@@ -14,8 +14,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.jms.Message;
+import javax.jms.Queue;
+import javax.jms.QueueBrowser;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.naming.InitialContext;
 
 /**
  *
@@ -116,21 +127,7 @@ public class StudentWebService {
         return this.studentList;
     }
     
-    @WebMethod(operationName = "checkPassword")
-    public boolean checkPassword(int studentID, String password) throws ClassNotFoundException, SQLException
-    {
-        Connection connection =this.connectDatabaseSchema();
-        
-        Statement statement =  connection.createStatement();
-        ResultSet rs=statement.executeQuery("SELECT * FROM "+tableName);
-        
-        while(rs.next()){
-            
-        }
-        
-        
-        return true;
-    }
+
     
      private Connection connectDatabaseSchema() throws ClassNotFoundException, SQLException
      {
@@ -170,4 +167,88 @@ public class StudentWebService {
         studentList.add(new Student("Thuan",26, Gender.Female));
         studentList.add(new Student("Hai",7, Gender.Male));
     }
+    
+    
+    //ZETING_____________
+    
+    private final String QUEUE_FACTORY_LOCATION = "myQueueConnectionFactory";
+    private final String ANNOUNCE_QUEUE_LOCATION = "Announces";
+    private final String NO_TARGET_INDICATOR = "[NO TARGET]";
+    
+    @WebMethod(operationName = "checkPassword")
+    public boolean checkPassword(int studentID, String password) throws Exception
+    {
+        Connection connection =this.connectDatabaseSchema();
+        
+        Statement statement =  connection.createStatement();
+        ResultSet rs=statement.executeQuery("SELECT * FROM "+tableName);
+        
+        while(rs.next()){
+            if(rs.getInt("STUDENTID")==studentID){
+                return password.equals(rs.getString("PASSWORD"));
+               
+            }
+        }
+        return false;
+    }
+    
+    @WebMethod(operationName = "sentMessageToAnnounce")
+    public void sentMessageToAnnounce(int announcesID,String topic, String body) throws Exception {
+        String queueMessage = announcesID+"-"
+                +this.NO_TARGET_INDICATOR+"-"
+                +topic+"-"
+                +body;
+        this.messageOut(queueMessage);
+    }
+     @WebMethod(operationName = "sentMessageToAnnounceWithTarget")
+    public void sentMessageToAnnounceWithTarget(int announcesID,String Target,String topic, String body) throws Exception{
+        String queueMessage = announcesID+"-"
+                +Target+"-"
+                +topic+"-"
+                +body;
+        this.messageOut(queueMessage);
+    }
+    
+    @WebMethod(operationName = "getAnnounce")
+    public ArrayList getAnnounce() throws Exception {
+        System.out.println("all announces");
+        
+        ArrayList<String> result = new ArrayList<>();
+        InitialContext initialContext = new InitialContext();
+        QueueConnectionFactory factory = (QueueConnectionFactory) initialContext.lookup(this.QUEUE_FACTORY_LOCATION);
+        QueueConnection connection = factory.createQueueConnection();
+        connection.start();
+
+        QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+        Queue announceQueue = (Queue) initialContext.lookup(this.ANNOUNCE_QUEUE_LOCATION);
+
+        QueueBrowser browser = session.createBrowser(announceQueue);
+        Enumeration collection = browser.getEnumeration();
+
+        if (!collection.hasMoreElements()) {
+            System.out.println("[ANNOUNCES QUEUE: NO ELEMENT INSIDE!]");
+        } else {
+            while (collection.hasMoreElements()) {
+                Message message = (Message) collection.nextElement();
+                System.out.println(message.getBody(String.class));
+                result.add(message.getBody(String.class));
+            }
+        }
+        return result;
+    }
+
+    private void messageOut(String compeletedMessage) throws Exception {
+        System.out.println("Message OUT.");
+        InitialContext initialContext = new InitialContext();
+        QueueConnectionFactory factory = (QueueConnectionFactory) initialContext.lookup(this.QUEUE_FACTORY_LOCATION);
+        QueueConnection connection = factory.createQueueConnection();
+        connection.start();
+        QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+        Queue announceQueue = (Queue) initialContext.lookup(this.ANNOUNCE_QUEUE_LOCATION);    
+        QueueSender sender = session.createSender(announceQueue);
+        TextMessage msg = session.createTextMessage(compeletedMessage);
+        sender.send(msg); 
+        connection.close();
+    }   
 }
+

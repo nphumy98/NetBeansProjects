@@ -22,7 +22,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import webservicepackage.Exception_Exception;
 import webservicepackage.StudentWebService_Service;
+
 
 /**
  *
@@ -32,7 +34,11 @@ public class AppServlet extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/StudentServer/StudentWebService.wsdl")
     private StudentWebService_Service service;
+
     public static String message="hehe";
+    public final String PAGE_NAME = "Student login";
+    public final String PAGE_TITLE = "Student login";
+    
     
     String userName;
     String password;
@@ -82,10 +88,10 @@ public class AppServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AppServlet</title>");            
+            out.println("<title>"+this.PAGE_NAME+"</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Admin Login</h1>");
+            out.println("<h1>"+this.PAGE_TITLE+"</h1>");
             out.println("<form action='http://localhost:8080/StudentApp/AppServlet' method = 'Post'>");
             out.println("User ID:  <input type='text' name='UserID'>");
             out.println("User Password:  <input type='password' name='Password'>");
@@ -95,9 +101,6 @@ public class AppServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
-
-        
-       
         
     }
 
@@ -131,7 +134,12 @@ public class AppServlet extends HttpServlet {
         System.out.println(message);
         this.userName = request.getParameter("UserID").toString();
         this.password = request.getParameter("Password").toString();
-        boolean pass = this.checkPassword(Integer.parseInt(userName), password);
+        boolean pass = false;
+        try {
+            pass = this.checkPassword(Integer.parseInt(userName), password);
+        } catch (Exception_Exception ex) {
+            Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         if(pass){
@@ -139,11 +147,12 @@ public class AppServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AppServlet</title>");            
+            out.println("<title>"+this.PAGE_TITLE+"</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Admin Login</h1>");
-            out.println("<h1>Welcome back admin "+this.userName+"</h1>");
+            out.println("<h1>"+this.PAGE_NAME+"</h1>");
+            out.println("<h1>Welcome back "+this.userName+"</h1>");
+            
             out.println("</body>");
             out.println("</html>");
              }
@@ -152,15 +161,14 @@ public class AppServlet extends HttpServlet {
              out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AppServlet</title>");            
+            out.println("<title>"+this.PAGE_TITLE+"</title>");          
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Admin Login</h1>");
-            out.println("<h1>Your passowrd is wrong</h1>");
+            out.println("<h1>"+this.PAGE_NAME+"</h1>");
+            out.println("<h1>Your password or user name is wrong</h1>");
             out.println("</body>");
             out.println("</html>");
-        }
-            
+        }            
     }
         
       //  processRequest(request, response);
@@ -176,11 +184,12 @@ public class AppServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private boolean checkPassword(int arg0, java.lang.String arg1) {
+    private boolean checkPassword(int arg0, java.lang.String arg1) throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
         return port.checkPassword(arg0, arg1);
     }
+
 
 }

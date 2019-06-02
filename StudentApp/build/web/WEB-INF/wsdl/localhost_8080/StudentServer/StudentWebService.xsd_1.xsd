@@ -10,6 +10,10 @@
 
 <xs:element name="checkPasswordResponse" type="tns:checkPasswordResponse"/>
 
+<xs:element name="getAnnounce" type="tns:getAnnounce"/>
+
+<xs:element name="getAnnounceResponse" type="tns:getAnnounceResponse"/>
+
 <xs:element name="getStudentList" type="tns:getStudentList"/>
 
 <xs:element name="getStudentListResponse" type="tns:getStudentListResponse"/>
@@ -22,6 +26,14 @@
 
 <xs:element name="makeStudentResponse" type="tns:makeStudentResponse"/>
 
+<xs:element name="sentMessageToAnnounce" type="tns:sentMessageToAnnounce"/>
+
+<xs:element name="sentMessageToAnnounceResponse" type="tns:sentMessageToAnnounceResponse"/>
+
+<xs:element name="sentMessageToAnnounceWithTarget" type="tns:sentMessageToAnnounceWithTarget"/>
+
+<xs:element name="sentMessageToAnnounceWithTargetResponse" type="tns:sentMessageToAnnounceWithTargetResponse"/>
+
 <xs:complexType name="checkPassword">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"/>
@@ -32,6 +44,12 @@
 <xs:complexType name="checkPasswordResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -55,6 +73,31 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="sentMessageToAnnounce">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sentMessageToAnnounceResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="sentMessageToAnnounceWithTarget">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+<xs:element name="arg2" type="xs:string" minOccurs="0"/>
+<xs:element name="arg3" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sentMessageToAnnounceWithTargetResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="initList">
 <xs:sequence/>
 </xs:complexType>
@@ -65,9 +108,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Exception">
+<xs:complexType name="makeStudent">
 <xs:sequence>
-<xs:element name="message" type="xs:string" minOccurs="0"/>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="makeStudentResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:student" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -83,15 +132,13 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="makeStudent">
-<xs:sequence>
-<xs:element name="arg0" type="xs:string" minOccurs="0"/>
-</xs:sequence>
+<xs:complexType name="getAnnounce">
+<xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="makeStudentResponse">
+<xs:complexType name="getAnnounceResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:student" minOccurs="0"/>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
