@@ -1,4 +1,6 @@
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author MY PHU NGUYEN
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class Student {
     private static int studentNumber=0;
@@ -64,7 +67,7 @@ public class Student {
         Student.studentNumber = studentNumber;
     }
     
-    @XmlElement
+
     public void setGender(Gender gender) {
         this.gender = gender;
     }
@@ -73,7 +76,7 @@ public class Student {
         return gender;
     }
     
-    @XmlElement
+
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
@@ -82,7 +85,7 @@ public class Student {
         return studentName;
     }
     
-    @XmlElement
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -91,7 +94,7 @@ public class Student {
         return age;
     }
     
-    @XmlElement
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -99,7 +102,6 @@ public class Student {
         return password;
     }
 
-    @XmlAttribute
     public void setStudentID(int studentID) {
         this.studentID = studentID;
     }

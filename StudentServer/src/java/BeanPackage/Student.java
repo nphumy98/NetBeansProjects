@@ -5,14 +5,30 @@
  */
 package BeanPackage;
 
-import javax.naming.InitialContext;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
  * @author MY PHU NGUYEN
  */
 
+/**
+ *
+ * @author MY PHU NGUYEN
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Student {
     private static int studentNumber=0;
     private int studentID;
@@ -20,6 +36,11 @@ public class Student {
     private int age;
     private Gender gender;
     private String password;
+    
+    public Student ()
+    {
+        super();
+    }
     
     public Student(int studentID, String studentName, int age, Gender gender, String password)
     {
@@ -48,50 +69,55 @@ public class Student {
     public static int getStudentNumber() {
         return studentNumber;
     }
-
+    
     public static void setStudentNumber(int studentNumber) {
         Student.studentNumber = studentNumber;
+    }
+    
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
     
     public Gender getGender() {
         return gender;
     }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
     
-    public int getStudentID() {
-        return studentID;
+    public String getStudentName() {
+        return studentName;
+    }
+    
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getPassword() {
+        return password;
     }
 
     public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
-
-    public String getStudentName() {
-        return studentName;
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    @Override
+    public String toString() {
+        return "Student{" + "studentID=" + studentID + ", studentName=" + studentName + ", age=" + age + ", gender=" + gender + ", password=" + password + '}';
     }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    
     
     
 }
+

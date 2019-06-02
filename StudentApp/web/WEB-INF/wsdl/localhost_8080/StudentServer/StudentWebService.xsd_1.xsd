@@ -2,6 +2,8 @@
 
 <xs:element name="Exception" type="tns:Exception"/>
 
+<xs:element name="JAXBException" type="tns:JAXBException"/>
+
 <xs:element name="addStudent" type="tns:addStudent"/>
 
 <xs:element name="addStudentResponse" type="tns:addStudentResponse"/>
@@ -46,6 +48,12 @@
 
 <xs:element name="sentMessageToAnnounceWithTargetResponse" type="tns:sentMessageToAnnounceWithTargetResponse"/>
 
+<xs:element name="student" type="tns:student"/>
+
+<xs:element name="unMarshallStudentObject" type="tns:unMarshallStudentObject"/>
+
+<xs:element name="unMarshallStudentObjectResponse" type="tns:unMarshallStudentObjectResponse"/>
+
 <xs:complexType name="checkPassword">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"/>
@@ -89,11 +97,11 @@
 
 <xs:complexType name="student">
 <xs:sequence>
+<xs:element name="studentID" type="xs:int"/>
+<xs:element name="studentName" type="xs:string" minOccurs="0"/>
 <xs:element name="age" type="xs:int"/>
 <xs:element name="gender" type="tns:gender" minOccurs="0"/>
 <xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="studentID" type="xs:int"/>
-<xs:element name="studentName" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -167,7 +175,7 @@
 
 <xs:complexType name="getStudentInformationResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -179,6 +187,36 @@
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="unMarshallStudentObject">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="unMarshallStudentObjectResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:student" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="JAXBException">
+<xs:sequence>
+<xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+<xs:element name="linkedException" type="tns:throwable" minOccurs="0"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="throwable">
+<xs:sequence>
+<xs:element name="stackTrace" type="tns:stackTraceElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="stackTraceElement" final="extension restriction">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="announceDecode">

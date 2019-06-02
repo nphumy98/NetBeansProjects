@@ -19,6 +19,15 @@
 <message name="sentMessageToAnnounceWithTargetResponse">
 <part name="parameters" element="tns:sentMessageToAnnounceWithTargetResponse"/>
 </message>
+<message name="unMarshallStudentObject">
+<part name="parameters" element="tns:unMarshallStudentObject"/>
+</message>
+<message name="unMarshallStudentObjectResponse">
+<part name="parameters" element="tns:unMarshallStudentObjectResponse"/>
+</message>
+<message name="JAXBException">
+<part name="fault" element="tns:JAXBException"/>
+</message>
 <message name="sentMessageToAnnounce">
 <part name="parameters" element="tns:sentMessageToAnnounce"/>
 </message>
@@ -83,6 +92,11 @@
 <input wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTargetRequest" message="tns:sentMessageToAnnounceWithTarget"/>
 <output wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTargetResponse" message="tns:sentMessageToAnnounceWithTargetResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceWithTarget/Fault/Exception"/>
+</operation>
+<operation name="unMarshallStudentObject">
+<input wsam:Action="http://WebServicePackage/StudentWebService/unMarshallStudentObjectRequest" message="tns:unMarshallStudentObject"/>
+<output wsam:Action="http://WebServicePackage/StudentWebService/unMarshallStudentObjectResponse" message="tns:unMarshallStudentObjectResponse"/>
+<fault message="tns:JAXBException" name="JAXBException" wsam:Action="http://WebServicePackage/StudentWebService/unMarshallStudentObject/Fault/JAXBException"/>
 </operation>
 <operation name="sentMessageToAnnounce">
 <input wsam:Action="http://WebServicePackage/StudentWebService/sentMessageToAnnounceRequest" message="tns:sentMessageToAnnounce"/>
@@ -153,6 +167,18 @@
 </output>
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"/>
+</fault>
+</operation>
+<operation name="unMarshallStudentObject">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="JAXBException">
+<soap:fault name="JAXBException" use="literal"/>
 </fault>
 </operation>
 <operation name="sentMessageToAnnounce">

@@ -8,6 +8,7 @@ package ServletPackage;
 //import ModelPackage.MyListener;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.JAXB;
 import javax.xml.ws.WebServiceRef;
 import webservicepackage.Exception_Exception;
+import webservicepackage.JAXBException_Exception;
+import webservicepackage.Student;
 import webservicepackage.StudentWebService_Service;
 
 
@@ -41,10 +45,10 @@ public class AppServlet extends HttpServlet {
     public final String PAGE_NAME = "Student login";
     public final String PAGE_TITLE = "Student login";
     private final String NO_TARGET_INDICATOR = "0";
-    
+
     private String userID;
     private String password;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,7 +62,7 @@ public class AppServlet extends HttpServlet {
             throws ServletException, IOException {
         this.userID=null;
         this.password=null;
-          
+
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
@@ -66,7 +70,7 @@ public class AppServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>"+this.PAGE_NAME+"</title>");            
+            out.println("<title>"+this.PAGE_NAME+"</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>"+this.PAGE_TITLE+"</h1>");
@@ -78,7 +82,7 @@ public class AppServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -107,25 +111,35 @@ public class AppServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         System.out.println(message);
         this.userID = request.getParameter("UserID").toString();
         this.password = request.getParameter("Password").toString();
 
 
-        
-        
+
+
         boolean pass = false;
         try {
             pass = this.checkPassword(Integer.parseInt(userID), password);
         } catch (Exception_Exception ex) {
             Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
         if (pass) {
-            ArrayList<String> singleStudent = null;
+            ArrayList<String> singleStudent = new ArrayList<String>();
             try {
-                singleStudent = (ArrayList<String>) this.getStudentInformation(Integer.parseInt(this.userID));
+                String xml=this.getStudentInformation(Integer.parseInt(this.userID));
+                System.out.println("XML is: "+xml);
+                Student aStudent= unMarshallStudentObject(xml);
+
+                singleStudent.add(Integer.toString(aStudent.getStudentID()));
+                singleStudent.add(aStudent.getStudentName());
+                singleStudent.add(Integer.toString(aStudent.getAge()));
+                singleStudent.add(aStudent.getGender().toString());
+                singleStudent.add(aStudent.getPassword());
             } catch (Exception_Exception ex) {
+                Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JAXBException_Exception ex) {
                 Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -168,7 +182,7 @@ public class AppServlet extends HttpServlet {
                 } catch (Exception_Exception ex) {
                     Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 out.println("<br>");
                 out.println("<h1>Special Announcement</h1>");
                 try {
@@ -183,7 +197,7 @@ public class AppServlet extends HttpServlet {
 
                 } catch (Exception_Exception ex) {
                     Logger.getLogger(AppServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }              
+                }
 
                 out.println("</body>");
                 out.println("</html>");
@@ -193,16 +207,16 @@ public class AppServlet extends HttpServlet {
              out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>"+this.PAGE_TITLE+"</title>");          
+            out.println("<title>"+this.PAGE_TITLE+"</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>"+this.PAGE_NAME+"</h1>");
             out.println("<h1>Your password or user name is wrong</h1>");
             out.println("</body>");
             out.println("</html>");
-        }            
+        }
     }
-        
+
     }
 
     /**
@@ -250,11 +264,18 @@ public class AppServlet extends HttpServlet {
         return port.announceDecode(arg0);
     }
 
-    private java.util.List<java.lang.String> getStudentInformation(int arg0) throws Exception_Exception {
+    private String getStudentInformation(int arg0) throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
         return port.getStudentInformation(arg0);
+    }
+
+    private Student unMarshallStudentObject(java.lang.String arg0) throws JAXBException_Exception {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+        return port.unMarshallStudentObject(arg0);
     }
 
 
