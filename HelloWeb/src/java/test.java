@@ -44,10 +44,11 @@ public class test {
           System.out.println( writer.toString());
          StringReader sr = new StringReader(writer.toString());
          
-         Unmarshaller unmarshall = context.createUnmarshaller();
          Student aStudent=    JAXB.unmarshal(sr, Student.class);
+         Student anotherStudent= new Student("Dat",12,Gender.Female);
          
          System.out.println(aStudent);
+         System.out.println(Student.getStudentNumber());
       
    }
 }
