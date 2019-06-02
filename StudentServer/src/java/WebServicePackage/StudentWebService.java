@@ -59,8 +59,9 @@ public class StudentWebService {
                 String name= rs.getString("name"); //read student  Name
                 int age= rs.getInt("age");// read student age
                 Gender gender= Gender.valueOf(rs.getString("gender"));
+                String password= rs.getString("password");
                 //create Student Object
-                Student aStudent= new Student(studentID, name, age,gender);
+                Student aStudent= new Student(studentID, name, age,gender,password);
                 //add Student to studentList
                 studentList.add(aStudent);
                 System.out.println("one student has been added");
@@ -71,18 +72,18 @@ public class StudentWebService {
            System.out.println("table is not existed");
             // Step 4: Creating a new STUDENTDB table in DMSDB
             String sqlQuery = "CREATE TABLE "+tableName + " (studentID INT PRIMARY KEY," +
-            " name VARCHAR(20), age INT, gender VARCHAR(20))";
+            " name VARCHAR(20), age INT, gender VARCHAR(20), password VARCHAR(20))";
             int resultDB = statement.executeUpdate(sqlQuery);
             if(resultDB == 0)
             System.out.println("Student Table is created");
             // Step 5: Inserting a record in the Student table in DMSDB
             sqlQuery = "INSERT INTO "+ tableName +" VALUES" +
-            "(1, 'Minh',18, 'Male')," +
-            "(2, 'Huyen',20, 'Female')," +
-            "(3, 'Duc',19, 'Male')," +
-            "(4, 'Nghia',45, 'Male'),"+
-            "(5, 'Thuan',26, 'Female'),"+
-            "(6, 'Hai',7, 'Male')";
+            "(1, 'Minh',18, 'Male','123')," +
+            "(2, 'Huyen',20, 'Female','123')," +
+            "(3, 'Duc',19, 'Male','123')," +
+            "(4, 'Nghia',45, 'Male','123'),"+
+            "(5, 'Thuan',26, 'Female','123'),"+
+            "(6, 'Hai',7, 'Male','123')";
             resultDB = statement.executeUpdate(sqlQuery);
             if(resultDB == 6)
             System.out.println("6 records are insterted in Student Table");
@@ -115,6 +116,22 @@ public class StudentWebService {
         return this.studentList;
     }
     
+    @WebMethod(operationName = "checkPassword")
+    public boolean checkPassword(int studentID, String password) throws ClassNotFoundException, SQLException
+    {
+        Connection connection =this.connectDatabaseSchema();
+        
+        Statement statement =  connection.createStatement();
+        ResultSet rs=statement.executeQuery("SELECT * FROM "+tableName);
+        
+        while(rs.next()){
+            
+        }
+        
+        
+        return true;
+    }
+    
      private Connection connectDatabaseSchema() throws ClassNotFoundException, SQLException
      {
 
@@ -143,7 +160,7 @@ public class StudentWebService {
         }
         return false;
     }
-    
+
     private void initialiseStudentList()
     {
         studentList.add(new Student("Minh",18, Gender.Male));
