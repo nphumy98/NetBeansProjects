@@ -24,31 +24,23 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Exception_QNAME = new QName("http://WebServicePackage/", "Exception");
-    private final static QName _AddAnnouncement_QNAME = new QName("http://WebServicePackage/", "addAnnouncement");
-    private final static QName _AddAnnouncementResponse_QNAME = new QName("http://WebServicePackage/", "addAnnouncementResponse");
-    private final static QName _GetAnnouncementList_QNAME = new QName("http://WebServicePackage/", "getAnnouncementList");
-    private final static QName _GetAnnouncementListResponse_QNAME = new QName("http://WebServicePackage/", "getAnnouncementListResponse");
-    private final static QName _InitAnnouncement_QNAME = new QName("http://WebServicePackage/", "initAnnouncement");
-    private final static QName _InitAnnouncementResponse_QNAME = new QName("http://WebServicePackage/", "initAnnouncementResponse");
-    private final static QName _MakeAnnouncementObject_QNAME = new QName("http://WebServicePackage/", "makeAnnouncementObject");
-    private final static QName _MakeAnnouncementObjectResponse_QNAME = new QName("http://WebServicePackage/", "makeAnnouncementObjectResponse");
-    private final static QName _SelectAllAnnouncementDB_QNAME = new QName("http://WebServicePackage/", "selectAllAnnouncementDB");
     private final static QName _SelectAllAnnouncementDBResponse_QNAME = new QName("http://WebServicePackage/", "selectAllAnnouncementDBResponse");
+    private final static QName _Exception_QNAME = new QName("http://WebServicePackage/", "Exception");
+    private final static QName _AddAnnouncementResponse_QNAME = new QName("http://WebServicePackage/", "addAnnouncementResponse");
+    private final static QName _SelectAllAnnouncementDB_QNAME = new QName("http://WebServicePackage/", "selectAllAnnouncementDB");
+    private final static QName _MakeAnnouncementObjectResponse_QNAME = new QName("http://WebServicePackage/", "makeAnnouncementObjectResponse");
+    private final static QName _GetAnnouncementList_QNAME = new QName("http://WebServicePackage/", "getAnnouncementList");
+    private final static QName _MakeAnnouncementObject_QNAME = new QName("http://WebServicePackage/", "makeAnnouncementObject");
+    private final static QName _InitAnnouncement_QNAME = new QName("http://WebServicePackage/", "initAnnouncement");
+    private final static QName _AddAnnouncement_QNAME = new QName("http://WebServicePackage/", "addAnnouncement");
+    private final static QName _GetAnnouncementListResponse_QNAME = new QName("http://WebServicePackage/", "getAnnouncementListResponse");
+    private final static QName _InitAnnouncementResponse_QNAME = new QName("http://WebServicePackage/", "initAnnouncementResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservicepackage
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Exception }
-     * 
-     */
-    public Exception createException() {
-        return new Exception();
     }
 
     /**
@@ -60,35 +52,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddAnnouncementResponse }
-     * 
-     */
-    public AddAnnouncementResponse createAddAnnouncementResponse() {
-        return new AddAnnouncementResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAnnouncementList }
-     * 
-     */
-    public GetAnnouncementList createGetAnnouncementList() {
-        return new GetAnnouncementList();
-    }
-
-    /**
      * Create an instance of {@link GetAnnouncementListResponse }
      * 
      */
     public GetAnnouncementListResponse createGetAnnouncementListResponse() {
         return new GetAnnouncementListResponse();
-    }
-
-    /**
-     * Create an instance of {@link InitAnnouncement }
-     * 
-     */
-    public InitAnnouncement createInitAnnouncement() {
-        return new InitAnnouncement();
     }
 
     /**
@@ -100,11 +68,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link InitAnnouncement }
+     * 
+     */
+    public InitAnnouncement createInitAnnouncement() {
+        return new InitAnnouncement();
+    }
+
+    /**
      * Create an instance of {@link MakeAnnouncementObject }
      * 
      */
     public MakeAnnouncementObject createMakeAnnouncementObject() {
         return new MakeAnnouncementObject();
+    }
+
+    /**
+     * Create an instance of {@link GetAnnouncementList }
+     * 
+     */
+    public GetAnnouncementList createGetAnnouncementList() {
+        return new GetAnnouncementList();
     }
 
     /**
@@ -124,6 +108,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AddAnnouncementResponse }
+     * 
+     */
+    public AddAnnouncementResponse createAddAnnouncementResponse() {
+        return new AddAnnouncementResponse();
+    }
+
+    /**
+     * Create an instance of {@link Exception }
+     * 
+     */
+    public Exception createException() {
+        return new Exception();
+    }
+
+    /**
      * Create an instance of {@link SelectAllAnnouncementDBResponse }
      * 
      */
@@ -140,12 +140,17 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SelectAllAnnouncementDBResponse }{@code >}}
      * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "selectAllAnnouncementDBResponse")
+    public JAXBElement<SelectAllAnnouncementDBResponse> createSelectAllAnnouncementDBResponse(SelectAllAnnouncementDBResponse value) {
+        return new JAXBElement<SelectAllAnnouncementDBResponse>(_SelectAllAnnouncementDBResponse_QNAME, SelectAllAnnouncementDBResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Exception }{@code >}}
+     * 
      */
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "Exception")
     public JAXBElement<Exception> createException(Exception value) {
@@ -153,25 +158,8 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AddAnnouncement }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link AddAnnouncementResponse }{@code >}}
      * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link AddAnnouncement }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "addAnnouncement")
-    public JAXBElement<AddAnnouncement> createAddAnnouncement(AddAnnouncement value) {
-        return new JAXBElement<AddAnnouncement>(_AddAnnouncement_QNAME, AddAnnouncement.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AddAnnouncementResponse }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link AddAnnouncementResponse }{@code >}
      */
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "addAnnouncementResponse")
     public JAXBElement<AddAnnouncementResponse> createAddAnnouncementResponse(AddAnnouncementResponse value) {
@@ -179,90 +167,8 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAnnouncementList }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SelectAllAnnouncementDB }{@code >}}
      * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link GetAnnouncementList }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnouncementList")
-    public JAXBElement<GetAnnouncementList> createGetAnnouncementList(GetAnnouncementList value) {
-        return new JAXBElement<GetAnnouncementList>(_GetAnnouncementList_QNAME, GetAnnouncementList.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAnnouncementListResponse }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link GetAnnouncementListResponse }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnouncementListResponse")
-    public JAXBElement<GetAnnouncementListResponse> createGetAnnouncementListResponse(GetAnnouncementListResponse value) {
-        return new JAXBElement<GetAnnouncementListResponse>(_GetAnnouncementListResponse_QNAME, GetAnnouncementListResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InitAnnouncement }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link InitAnnouncement }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "initAnnouncement")
-    public JAXBElement<InitAnnouncement> createInitAnnouncement(InitAnnouncement value) {
-        return new JAXBElement<InitAnnouncement>(_InitAnnouncement_QNAME, InitAnnouncement.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InitAnnouncementResponse }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link InitAnnouncementResponse }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "initAnnouncementResponse")
-    public JAXBElement<InitAnnouncementResponse> createInitAnnouncementResponse(InitAnnouncementResponse value) {
-        return new JAXBElement<InitAnnouncementResponse>(_InitAnnouncementResponse_QNAME, InitAnnouncementResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link MakeAnnouncementObject }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link MakeAnnouncementObject }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "makeAnnouncementObject")
-    public JAXBElement<MakeAnnouncementObject> createMakeAnnouncementObject(MakeAnnouncementObject value) {
-        return new JAXBElement<MakeAnnouncementObject>(_MakeAnnouncementObject_QNAME, MakeAnnouncementObject.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link MakeAnnouncementObjectResponse }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link MakeAnnouncementObjectResponse }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "makeAnnouncementObjectResponse")
-    public JAXBElement<MakeAnnouncementObjectResponse> createMakeAnnouncementObjectResponse(MakeAnnouncementObjectResponse value) {
-        return new JAXBElement<MakeAnnouncementObjectResponse>(_MakeAnnouncementObjectResponse_QNAME, MakeAnnouncementObjectResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SelectAllAnnouncementDB }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link SelectAllAnnouncementDB }{@code >}
      */
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "selectAllAnnouncementDB")
     public JAXBElement<SelectAllAnnouncementDB> createSelectAllAnnouncementDB(SelectAllAnnouncementDB value) {
@@ -270,16 +176,66 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SelectAllAnnouncementDBResponse }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link MakeAnnouncementObjectResponse }{@code >}}
      * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link SelectAllAnnouncementDBResponse }{@code >}
      */
-    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "selectAllAnnouncementDBResponse")
-    public JAXBElement<SelectAllAnnouncementDBResponse> createSelectAllAnnouncementDBResponse(SelectAllAnnouncementDBResponse value) {
-        return new JAXBElement<SelectAllAnnouncementDBResponse>(_SelectAllAnnouncementDBResponse_QNAME, SelectAllAnnouncementDBResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "makeAnnouncementObjectResponse")
+    public JAXBElement<MakeAnnouncementObjectResponse> createMakeAnnouncementObjectResponse(MakeAnnouncementObjectResponse value) {
+        return new JAXBElement<MakeAnnouncementObjectResponse>(_MakeAnnouncementObjectResponse_QNAME, MakeAnnouncementObjectResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAnnouncementList }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnouncementList")
+    public JAXBElement<GetAnnouncementList> createGetAnnouncementList(GetAnnouncementList value) {
+        return new JAXBElement<GetAnnouncementList>(_GetAnnouncementList_QNAME, GetAnnouncementList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link MakeAnnouncementObject }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "makeAnnouncementObject")
+    public JAXBElement<MakeAnnouncementObject> createMakeAnnouncementObject(MakeAnnouncementObject value) {
+        return new JAXBElement<MakeAnnouncementObject>(_MakeAnnouncementObject_QNAME, MakeAnnouncementObject.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InitAnnouncement }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "initAnnouncement")
+    public JAXBElement<InitAnnouncement> createInitAnnouncement(InitAnnouncement value) {
+        return new JAXBElement<InitAnnouncement>(_InitAnnouncement_QNAME, InitAnnouncement.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AddAnnouncement }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "addAnnouncement")
+    public JAXBElement<AddAnnouncement> createAddAnnouncement(AddAnnouncement value) {
+        return new JAXBElement<AddAnnouncement>(_AddAnnouncement_QNAME, AddAnnouncement.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAnnouncementListResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "getAnnouncementListResponse")
+    public JAXBElement<GetAnnouncementListResponse> createGetAnnouncementListResponse(GetAnnouncementListResponse value) {
+        return new JAXBElement<GetAnnouncementListResponse>(_GetAnnouncementListResponse_QNAME, GetAnnouncementListResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InitAnnouncementResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "initAnnouncementResponse")
+    public JAXBElement<InitAnnouncementResponse> createInitAnnouncementResponse(InitAnnouncementResponse value) {
+        return new JAXBElement<InitAnnouncementResponse>(_InitAnnouncementResponse_QNAME, InitAnnouncementResponse.class, null, value);
     }
 
 }
