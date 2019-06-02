@@ -157,16 +157,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getAnnounce">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getAnnounceResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getStudentInformation">
 <xs:sequence>
 <xs:element name="arg0" type="xs:int"/>
@@ -174,6 +164,16 @@
 </xs:complexType>
 
 <xs:complexType name="getStudentInformationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAnnounce">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAnnounceResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>

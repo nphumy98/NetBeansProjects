@@ -113,14 +113,7 @@ public class StudentWebService {
         return aStudent;
     }
     
-     @WebMethod(operationName = "addStudent")
-    public int addStudent(String name)
-    {
-        Student aStudent = new Student(name,18, Gender.Male);
-        studentList.add(aStudent);
-        return studentList.size();
-    }
-    
+
    
 
     
@@ -171,9 +164,6 @@ public class StudentWebService {
 
     @WebMethod(operationName = "changePassword")
     public boolean changePassword(int studentID, String newPassword) throws Exception {
-
-        String sql = "UPDATE " + tableName + " SET PASSWORD = '" + newPassword + "' WHERE STUDENTID = " + studentID;
-        System.out.println(sql);
         Connection connection = this.connectDatabaseSchema();
         Statement statement = connection.createStatement();
         int count = statement.executeUpdate("UPDATE " + tableName + " SET PASSWORD = '" + newPassword + "' WHERE STUDENTID = " + studentID);
@@ -307,5 +297,17 @@ public class StudentWebService {
 
         return result;
     }
+    
+    @WebMethod(operationName = "addStudent")
+    public int addStudent(String name) throws Exception
+    {
+        int studentID = this.getStudentList().size()+1;
+        String sql = "Insert into "+this.tableName+"(STUDENTID,NAME,AGE,GENDER,PASSWORD)VALUES("+studentID+",'"+name+"',"+18+",'Male',"+"'123')";
+        System.out.println(sql);
+        Statement statement = this.connectDatabaseSchema().createStatement();
+        statement.execute(sql);
+        return this.getStudentList().size();
+    }
+    
 
 }
