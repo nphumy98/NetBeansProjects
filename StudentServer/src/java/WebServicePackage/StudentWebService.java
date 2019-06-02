@@ -7,8 +7,6 @@ package WebServicePackage;
 
 import BeanPackage.Gender;
 import BeanPackage.Student;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -29,11 +27,6 @@ import javax.jms.TextMessage;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.naming.InitialContext;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
 
 /**
  *
@@ -48,7 +41,7 @@ public class StudentWebService {
          // The driverURL to contain the Database Driver
         private final String driverURL = "org.apache.derby.jdbc.EmbeddedDriver";
         // The dbURL to contain the Database URL
-        private final String dbURL = "jdbc:derby://localhost:1527/DMSDB;" +
+        private final String dbURL = "jdbc:derby://localhost:1527/DMSDB;" + 
                   "create=true;user=dms;password=dms2018";
         private final String tableName="Student_DB";
 
@@ -63,8 +56,8 @@ public class StudentWebService {
         // Creating the SQL Statement
         Statement statement = connection.createStatement();
         //if connect sucessfully
-
-        //if studentDB table exist
+     
+        //if studentDB table exist 
         if (isTableExisting(tableName,connection))
         {
             System.out.println("table existed");
@@ -83,7 +76,7 @@ public class StudentWebService {
                 //add Student to studentList
                 studentList.add(aStudent);
                 System.out.println("one student has been added");
-            }
+            }               
         }
         else //if studentDB table not exist
         {
@@ -112,16 +105,16 @@ public class StudentWebService {
         connection.close();
         return this.studentList.size();
     }
-
+    
      @WebMethod(operationName = "makeStudent")
     public Student makeStudent(String name)
     {
         Student aStudent = new Student(name,18, Gender.Male);
         return aStudent;
     }
+    
 
-
-
+    
      private Connection connectDatabaseSchema() throws ClassNotFoundException, SQLException
      {
 
@@ -136,21 +129,21 @@ public class StudentWebService {
             System.out.println("Database is connected...");
             return connection;
      }
-
+     
     //this method is to check if the table Student already exist in the database
     private static boolean isTableExisting(String tableName, Connection theConnection) throws SQLException
     {
         DatabaseMetaData theMetaData = theConnection.getMetaData();
-
+        
         ResultSet existingTable = theMetaData.getTables(null, null, tableName.toUpperCase(), null);
-
+        
         if(existingTable.next())
         {
                 return true;
         }
         return false;
     }
-
+    
     private void initialiseStudentList()
     {
         studentList.add(new Student("Minh",18, Gender.Male));
@@ -190,30 +183,23 @@ public class StudentWebService {
     }
 
     @WebMethod(operationName = "getStudentInformation")
-    public String getStudentInformation(int studentID) throws Exception {
+    public ArrayList<String> getStudentInformation(int studentID) throws Exception {
+        ArrayList<String> result = new ArrayList<>();
         Connection connection = this.connectDatabaseSchema();
+
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT * FROM " + tableName);
 
-        int sID=-1;
-        String name="";
-        int age=-1;
-        Gender gender=Gender.Male;
-        String password="123";
         while (rs.next()) {
             if (rs.getInt("STUDENTID") == studentID) {
-                sID=rs.getInt("STUDENTID");
-                name=rs.getString("NAME");
-                age=rs.getInt("AGE");
-                gender=Gender.valueOf(rs.getString("GENDER"));
-                password=rs.getString("PASSWORD");
+                result.add(String.valueOf(rs.getInt("STUDENTID")));
+                result.add(rs.getString("NAME"));
+                result.add(String.valueOf(rs.getInt("AGE")));
+                result.add(rs.getString("GENDER"));
+                result.add(rs.getString("PASSWORD"));
             }
         }
-        Student aStudent= new Student(sID,name,age,gender,password);
-
-        String xml= marshallStudentObject(aStudent);
-        connection.close();
-        return xml;
+        return result;
     }
 
     @WebMethod(operationName = "sentMessageToAnnounce")
@@ -307,7 +293,7 @@ public class StudentWebService {
 
         return result;
     }
-
+    
     @WebMethod(operationName = "addStudent")
     public int addStudent(String name, int age, String genderString) throws Exception
     {
@@ -319,29 +305,5 @@ public class StudentWebService {
         Statement statement = this.connectDatabaseSchema().createStatement();
         statement.execute(sql);
         return this.getStudentList().size();
-    }
-
-    private String marshallStudentObject(Student aStudent) throws JAXBException
-    {
-         JAXBElement<Student> jaxbElement =  new JAXBElement(
-          new QName(Student.class.getSimpleName()), Student.class, aStudent);
-
-         //Create a String writer object which will be
-         //used to write jaxbElment XML to string
-         StringWriter writer = new StringWriter();
-
-         // create JAXBContext which will be used to update writer
-         JAXBContext context = JAXBContext.newInstance(Student.class);
-          // marshall or convert jaxbElement containing student to xml format
-         context.createMarshaller().marshal(jaxbElement, writer);
-         return writer.toString();
-    }
-
-      @WebMethod(operationName = "unMarshallStudentObject")
-    public Student unMarshallStudentObject(String xml) throws JAXBException
-    {
-         StringReader sr = new StringReader(xml);
-         Student aStudent=    JAXB.unmarshal(sr, Student.class);
-         return aStudent;
     }
 }
