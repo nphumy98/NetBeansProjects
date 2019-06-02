@@ -28,6 +28,8 @@ public class ObjectFactory {
     private final static QName _GetStudentListResponse_QNAME = new QName("http://WebServicePackage/", "getStudentListResponse");
     private final static QName _MakeStudentResponse_QNAME = new QName("http://WebServicePackage/", "makeStudentResponse");
     private final static QName _AddStudentResponse_QNAME = new QName("http://WebServicePackage/", "addStudentResponse");
+    private final static QName _CheckPasswordResponse_QNAME = new QName("http://WebServicePackage/", "checkPasswordResponse");
+    private final static QName _CheckPassword_QNAME = new QName("http://WebServicePackage/", "checkPassword");
     private final static QName _GetStudentList_QNAME = new QName("http://WebServicePackage/", "getStudentList");
     private final static QName _InitList_QNAME = new QName("http://WebServicePackage/", "initList");
     private final static QName _AddStudent_QNAME = new QName("http://WebServicePackage/", "addStudent");
@@ -82,11 +84,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CheckPassword }
+     * 
+     */
+    public CheckPassword createCheckPassword() {
+        return new CheckPassword();
+    }
+
+    /**
      * Create an instance of {@link AddStudentResponse }
      * 
      */
     public AddStudentResponse createAddStudentResponse() {
         return new AddStudentResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckPasswordResponse }
+     * 
+     */
+    public CheckPasswordResponse createCheckPasswordResponse() {
+        return new CheckPasswordResponse();
     }
 
     /**
@@ -155,6 +173,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://WebServicePackage/", name = "addStudentResponse")
     public JAXBElement<AddStudentResponse> createAddStudentResponse(AddStudentResponse value) {
         return new JAXBElement<AddStudentResponse>(_AddStudentResponse_QNAME, AddStudentResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckPasswordResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "checkPasswordResponse")
+    public JAXBElement<CheckPasswordResponse> createCheckPasswordResponse(CheckPasswordResponse value) {
+        return new JAXBElement<CheckPasswordResponse>(_CheckPasswordResponse_QNAME, CheckPasswordResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckPassword }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://WebServicePackage/", name = "checkPassword")
+    public JAXBElement<CheckPassword> createCheckPassword(CheckPassword value) {
+        return new JAXBElement<CheckPassword>(_CheckPassword_QNAME, CheckPassword.class, null, value);
     }
 
     /**

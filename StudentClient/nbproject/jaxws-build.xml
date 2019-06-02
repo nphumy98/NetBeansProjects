@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/webservicepackage"/>
         <delete dir="${build.generated.dir}/jax-wsCache/StudentWebService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-StudentWebService"/>
+    <target name="wsimport-client-AnnouncementWebService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/AnnouncementWebService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AnnouncementWebService" destdir="${build.generated.dir}/jax-wsCache/AnnouncementWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AnnouncementWebService/wsdl/localhost_8080/StudentServer/AnnouncementWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/StudentServer/AnnouncementWebService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/AnnouncementWebService/wsdl/localhost_8080/StudentServer/AnnouncementWebService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/AnnouncementWebService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/AnnouncementWebService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-AnnouncementWebService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservicepackage"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/AnnouncementWebService"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-StudentWebService, wsimport-client-AnnouncementWebService"/>
 </project>

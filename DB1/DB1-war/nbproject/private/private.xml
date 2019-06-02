@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Users/MY%20PHU%20NGUYEN/Documents/NetBeansProjects/DB1/DB1-war/web/index.html</file>
             <file>file:/C:/Users/MY%20PHU%20NGUYEN/Documents/NetBeansProjects/DB1/DB1-war/web/addStudent.jsp</file>
+            <file>file:/C:/Users/MY%20PHU%20NGUYEN/Documents/NetBeansProjects/DB1/DB1-war/web/viewStudent.jsp</file>
+            <file>file:/C:/Users/MY%20PHU%20NGUYEN/Documents/NetBeansProjects/DB1/DB1-war/src/java/StudentServlet/StudentDBServlet.java</file>
             <file>file:/C:/Users/MY%20PHU%20NGUYEN/Documents/NetBeansProjects/DB1/DB1-war/web/studentList.jsp</file>
         </group>
     </open-files>
