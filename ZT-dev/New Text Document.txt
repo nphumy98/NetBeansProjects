@@ -1,0 +1,8 @@
+SERVER COMMANDS:
+UserDB---
+	|-Insert-Name-Password-Type-Gender-Paper	[Insert new user]
+	|-Find-Name					[Get ID by Name]
+	|-View						[View all user]
+Action---
+	|-Announce-Topic-Body				[Send a announce to announce queue]
+	|-View						[See all announce in queue]
