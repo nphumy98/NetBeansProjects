@@ -89,11 +89,6 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            System.out.println(this.addStudent("test"));
-                    } catch (Exception_Exception ex) {
-            Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
-        }
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -129,11 +124,11 @@ public class ChangePassword extends HttpServlet {
         return port.changePassword(arg0, arg1);
     }
 
-    private int addStudent(java.lang.String arg0) throws Exception_Exception {
+    private int addStudent(java.lang.String arg0, int arg1, java.lang.String arg2) throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
-        return port.addStudent(arg0);
+        return port.addStudent(arg0, arg1, arg2);
     }
 
 }

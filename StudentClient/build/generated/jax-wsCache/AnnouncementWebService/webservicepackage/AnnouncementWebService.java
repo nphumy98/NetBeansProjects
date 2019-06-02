@@ -45,6 +45,23 @@ public interface AnnouncementWebService {
 
     /**
      * 
+     * @return
+     *     returns java.util.List<webservicepackage.Announcement>
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "selectAllAnnouncementDB", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.SelectAllAnnouncementDB")
+    @ResponseWrapper(localName = "selectAllAnnouncementDBResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.SelectAllAnnouncementDBResponse")
+    @Action(input = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDBRequest", output = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDBResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDB/Fault/Exception")
+    })
+    public List<Announcement> selectAllAnnouncementDB()
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
      * @param arg2
      * @param arg1
      * @param arg0
@@ -63,23 +80,6 @@ public interface AnnouncementWebService {
         String arg1,
         @WebParam(name = "arg2", targetNamespace = "")
         String arg2);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<webservicepackage.Announcement>
-     * @throws Exception_Exception
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "selectAllAnnouncementDB", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.SelectAllAnnouncementDB")
-    @ResponseWrapper(localName = "selectAllAnnouncementDBResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.SelectAllAnnouncementDBResponse")
-    @Action(input = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDBRequest", output = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDBResponse", fault = {
-        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDB/Fault/Exception")
-    })
-    public List<Announcement> selectAllAnnouncementDB()
-        throws Exception_Exception
-    ;
 
     /**
      * 

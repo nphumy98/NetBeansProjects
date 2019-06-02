@@ -13,17 +13,17 @@
 <message name="Exception">
 <part name="fault" element="tns:Exception"/>
 </message>
-<message name="makeAnnouncementObject">
-<part name="parameters" element="tns:makeAnnouncementObject"/>
-</message>
-<message name="makeAnnouncementObjectResponse">
-<part name="parameters" element="tns:makeAnnouncementObjectResponse"/>
-</message>
 <message name="selectAllAnnouncementDB">
 <part name="parameters" element="tns:selectAllAnnouncementDB"/>
 </message>
 <message name="selectAllAnnouncementDBResponse">
 <part name="parameters" element="tns:selectAllAnnouncementDBResponse"/>
+</message>
+<message name="makeAnnouncementObject">
+<part name="parameters" element="tns:makeAnnouncementObject"/>
+</message>
+<message name="makeAnnouncementObjectResponse">
+<part name="parameters" element="tns:makeAnnouncementObjectResponse"/>
 </message>
 <message name="addAnnouncement">
 <part name="parameters" element="tns:addAnnouncement"/>
@@ -43,14 +43,14 @@
 <output wsam:Action="http://WebServicePackage/AnnouncementWebService/getAnnouncementListResponse" message="tns:getAnnouncementListResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/AnnouncementWebService/getAnnouncementList/Fault/Exception"/>
 </operation>
-<operation name="makeAnnouncementObject">
-<input wsam:Action="http://WebServicePackage/AnnouncementWebService/makeAnnouncementObjectRequest" message="tns:makeAnnouncementObject"/>
-<output wsam:Action="http://WebServicePackage/AnnouncementWebService/makeAnnouncementObjectResponse" message="tns:makeAnnouncementObjectResponse"/>
-</operation>
 <operation name="selectAllAnnouncementDB">
 <input wsam:Action="http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDBRequest" message="tns:selectAllAnnouncementDB"/>
 <output wsam:Action="http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDBResponse" message="tns:selectAllAnnouncementDBResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDB/Fault/Exception"/>
+</operation>
+<operation name="makeAnnouncementObject">
+<input wsam:Action="http://WebServicePackage/AnnouncementWebService/makeAnnouncementObjectRequest" message="tns:makeAnnouncementObject"/>
+<output wsam:Action="http://WebServicePackage/AnnouncementWebService/makeAnnouncementObjectResponse" message="tns:makeAnnouncementObjectResponse"/>
 </operation>
 <operation name="addAnnouncement">
 <input wsam:Action="http://WebServicePackage/AnnouncementWebService/addAnnouncementRequest" message="tns:addAnnouncement"/>
@@ -77,15 +77,6 @@
 <soap:fault name="Exception" use="literal"/>
 </fault>
 </operation>
-<operation name="makeAnnouncementObject">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="selectAllAnnouncementDB">
 <soap:operation soapAction=""/>
 <input>
@@ -97,6 +88,15 @@
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"/>
 </fault>
+</operation>
+<operation name="makeAnnouncementObject">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 <operation name="addAnnouncement">
 <soap:operation soapAction=""/>
