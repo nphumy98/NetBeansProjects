@@ -56,7 +56,7 @@ public class NewServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception_Exception {
 //        response.setContentType("text/html;charset=UTF-8");
                      //get StudentList from DB
 //        try  
@@ -163,14 +163,14 @@ public class NewServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private int addStudent(java.lang.String arg0) {
+    private int addStudent(java.lang.String arg0) throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
         return port.addStudent(arg0);
     }
 
-    private java.util.List<webservicepackage.Student> getStudentList() {
+    private java.util.List<webservicepackage.Student> getStudentList() throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         webservicepackage.StudentWebService port = service.getStudentWebServicePort();
@@ -219,7 +219,7 @@ public class NewServlet extends HttpServlet {
         return port.makeAnnouncementObject(arg0, arg1, arg2);
     }
     
-        private void getStudentListDB(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        private void getStudentListDB(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Exception {
         ArrayList<Student> studentList= (ArrayList<Student>) getStudentList();
         //add StudentList to request
         request.setAttribute("STUDENT_LIST", studentList);

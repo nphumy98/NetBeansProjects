@@ -5,6 +5,7 @@
  */
 package WebServicePackage;
 
+
 import BeanPackage.Announcement;
 import BeanPackage.Gender;
 import BeanPackage.Student;
@@ -15,8 +16,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.jms.Queue;
+import javax.jms.QueueConnection;
+import javax.jms.QueueConnectionFactory;
+import javax.jms.QueueSender;
+import javax.jms.QueueSession;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.naming.InitialContext;
+
 
 /**
  *
@@ -119,6 +129,13 @@ public class AnnouncementWebService {
         //close connection
         connection.close();
         announcementList=selectAllAnnouncementDB();
+        if(target.equals("0")){
+              this.sentMessageToAnnounce(anAnncouncement.getAnnouncementID(),
+                    anAnncouncement.getTopic(), anAnncouncement.getBody());
+        }else{
+            this.sentMessageToAnnounceWithTarget(anAnncouncement.getAnnouncementID(),
+                    anAnncouncement.getTarget(), anAnncouncement.getTopic(), anAnncouncement.getBody());
+        }
         return announcementList.size();
     }
     
@@ -188,5 +205,40 @@ public class AnnouncementWebService {
         announcementList.add(new Announcement("1","Topic 41", "Body 41"));
         announcementList.add(new Announcement("0","Topic 50", "Body 50"));
         announcementList.add(new Announcement("0","Topic 60", "Body 60"));
+    }
+    //___________
+    
+    private final String QUEUE_FACTORY_LOCATION = "myQueueConnectionFactory";
+    private final String ANNOUNCE_QUEUE_LOCATION = "Announces";
+    private final String NO_TARGET_INDICATOR = "0";
+
+    private void sentMessageToAnnounce(int announcesID, String topic, String body) throws Exception {
+        String queueMessage = announcesID + "-"
+                + this.NO_TARGET_INDICATOR + "-"
+                + topic + "-"
+                + body;
+        this.messageOut(queueMessage);
+    }
+
+    private void sentMessageToAnnounceWithTarget(int announcesID, String Target, String topic, String body) throws Exception {
+        String queueMessage = announcesID + "-"
+                + Target + "-"
+                + topic + "-"
+                + body;
+        this.messageOut(queueMessage);
+    }
+    
+    private void messageOut(String compeletedMessage) throws Exception {
+        System.out.println("Message OUT.");
+        InitialContext initialContext = new InitialContext();
+        QueueConnectionFactory factory = (QueueConnectionFactory) initialContext.lookup(this.QUEUE_FACTORY_LOCATION);
+        QueueConnection connection = factory.createQueueConnection();
+        connection.start();
+        QueueSession session = connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+        Queue announceQueue = (Queue) initialContext.lookup(this.ANNOUNCE_QUEUE_LOCATION);
+        QueueSender sender = session.createSender(announceQueue);
+        TextMessage msg = session.createTextMessage(compeletedMessage);
+        sender.send(msg);
+        connection.close();
     }
 }

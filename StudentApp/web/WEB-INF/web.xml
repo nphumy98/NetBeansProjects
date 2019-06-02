@@ -4,9 +4,17 @@
         <servlet-name>AppServlet</servlet-name>
         <servlet-class>ServletPackage.AppServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>ServletPackage.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AppServlet</servlet-name>
         <url-pattern>/AppServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
