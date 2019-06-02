@@ -28,49 +28,6 @@ public interface AnnouncementWebService {
 
     /**
      * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns int
-     * @throws Exception_Exception
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "addAnnouncement", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.AddAnnouncement")
-    @ResponseWrapper(localName = "addAnnouncementResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.AddAnnouncementResponse")
-    @Action(input = "http://WebServicePackage/AnnouncementWebService/addAnnouncementRequest", output = "http://WebServicePackage/AnnouncementWebService/addAnnouncementResponse", fault = {
-        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/addAnnouncement/Fault/Exception")
-    })
-    public int addAnnouncement(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        String arg2)
-        throws Exception_Exception
-    ;
-
-    /**
-     * 
-     * @return
-     *     returns int
-     * @throws Exception_Exception
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "initAnnouncement", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitAnnouncement")
-    @ResponseWrapper(localName = "initAnnouncementResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitAnnouncementResponse")
-    @Action(input = "http://WebServicePackage/AnnouncementWebService/initAnnouncementRequest", output = "http://WebServicePackage/AnnouncementWebService/initAnnouncementResponse", fault = {
-        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/initAnnouncement/Fault/Exception")
-    })
-    public int initAnnouncement()
-        throws Exception_Exception
-    ;
-
-    /**
-     * 
      * @return
      *     returns java.util.List<webservicepackage.Announcement>
      * @throws Exception_Exception
@@ -121,6 +78,49 @@ public interface AnnouncementWebService {
         @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/selectAllAnnouncementDB/Fault/Exception")
     })
     public List<Announcement> selectAllAnnouncementDB()
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns int
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addAnnouncement", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.AddAnnouncement")
+    @ResponseWrapper(localName = "addAnnouncementResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.AddAnnouncementResponse")
+    @Action(input = "http://WebServicePackage/AnnouncementWebService/addAnnouncementRequest", output = "http://WebServicePackage/AnnouncementWebService/addAnnouncementResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/addAnnouncement/Fault/Exception")
+    })
+    public int addAnnouncement(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2)
+        throws Exception_Exception
+    ;
+
+    /**
+     * 
+     * @return
+     *     returns int
+     * @throws Exception_Exception
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "initAnnouncement", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitAnnouncement")
+    @ResponseWrapper(localName = "initAnnouncementResponse", targetNamespace = "http://WebServicePackage/", className = "webservicepackage.InitAnnouncementResponse")
+    @Action(input = "http://WebServicePackage/AnnouncementWebService/initAnnouncementRequest", output = "http://WebServicePackage/AnnouncementWebService/initAnnouncementResponse", fault = {
+        @FaultAction(className = Exception_Exception.class, value = "http://WebServicePackage/AnnouncementWebService/initAnnouncement/Fault/Exception")
+    })
+    public int initAnnouncement()
         throws Exception_Exception
     ;
 

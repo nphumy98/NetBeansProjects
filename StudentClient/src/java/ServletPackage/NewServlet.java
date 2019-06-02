@@ -22,6 +22,7 @@ import javax.naming.*;
 import javax.jms.*;
 import webservicepackage.Announcement;
 import webservicepackage.AnnouncementWebService_Service;
+import webservicepackage.Gender;
 
 /**
  *
@@ -57,33 +58,6 @@ public class NewServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception_Exception {
-//        response.setContentType("text/html;charset=UTF-8");
-                     //get StudentList from DB
-//        try  
-//        {   //Create and start connection  
-//            InitialContext ctx=new InitialContext();  
-//            QueueConnectionFactory f=(QueueConnectionFactory)ctx.lookup("myQueueConnectionFactory");  
-//            QueueConnection con=f.createQueueConnection();  
-//            con.start();  
-//            //2) create queue session  
-//            QueueSession ses=con.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);  
-//            //3) get the Queue object  
-//            Queue t=(Queue)ctx.lookup("myQueue");  
-//            //4)create QueueSender object         
-//            QueueSender sender=ses.createSender(t);  
-//            //5) create TextMessage object  
-//            TextMessage msg=ses.createTextMessage();  
-//              
-//            //6) write message  
-//
-//                msg.setText("Hello babe");  
-//                //7) send message  
-//                sender.send(msg);  
-//                System.out.println("Message successfully sent.");  
-//
-//            //8) connection close  
-//            con.close();  
-//        }catch(Exception e){System.out.println(e);}
         ArrayList<Student> studentList= (ArrayList<Student>) getStudentList();
         //add StudentList to request
         request.setAttribute("STUDENT_LIST", studentList);
@@ -131,6 +105,9 @@ public class NewServlet extends HttpServlet {
                 case "announceOne":
                     announceOne(request,response);
                     break;
+                case "add":
+                    add(request,response);
+                    break;
                 default:
                     getStudentListDB(request, response);
             }
@@ -163,13 +140,14 @@ public class NewServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private int addStudent(java.lang.String arg0) throws Exception_Exception {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        webservicepackage.StudentWebService port = service.getStudentWebServicePort();
-        return port.addStudent(arg0);
-    }
 
+    private int addStudent(java.lang.String arg0, int arg1, java.lang.String arg2) throws Exception_Exception {
+    // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+    // If the calling of port operations may lead to race condition some synchronization is required.
+    webservicepackage.StudentWebService port = service.getStudentWebServicePort();
+    return port.addStudent(arg0, arg1, arg2);
+    }
+    
     private java.util.List<webservicepackage.Student> getStudentList() throws Exception_Exception {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
@@ -268,11 +246,18 @@ public class NewServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
     
-    private void addStudentDB(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void addStudentDB(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception_Exception {
         //send to JSP page
         RequestDispatcher dispatcher= request.getRequestDispatcher("/AddStudentForm.jsp");
         dispatcher.forward(request, response);
+    }    
+
+    private void add(HttpServletRequest request, HttpServletResponse response) throws Exception_Exception, ServletException, IOException {
+        String name= request.getParameter("name");
+        int age= Integer.parseInt(request.getParameter("age"));
+        String genderString= request.getParameter("gender");
+        addStudent(name,age,genderString);
+        //send to JSP page
+        getStudentListDB(request, response);
     }
-    
-    
 }

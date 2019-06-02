@@ -295,10 +295,12 @@ public class StudentWebService {
     }
     
     @WebMethod(operationName = "addStudent")
-    public int addStudent(String name) throws Exception
+    public int addStudent(String name, int age, String genderString) throws Exception
     {
-        int studentID = this.getStudentList().size()+1;
-        String sql = "Insert into "+this.tableName+"(STUDENTID,NAME,AGE,GENDER,PASSWORD)VALUES("+studentID+",'"+name+"',"+18+",'Male',"+"'123')";
+        Gender gender= Gender.valueOf(genderString);
+        Student aStudent= new Student(name, age, gender);
+        int studentID = aStudent.getStudentID();
+        String sql = "Insert into "+this.tableName+"(STUDENTID,NAME,AGE,GENDER,PASSWORD)VALUES("+studentID+",'"+name+"',"+age+",'"+genderString+"',"+"'123')";
         System.out.println(sql);
         Statement statement = this.connectDatabaseSchema().createStatement();
         statement.execute(sql);

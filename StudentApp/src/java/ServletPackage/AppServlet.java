@@ -54,33 +54,6 @@ public class AppServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//        @Override
-//    public void init()
-//    {
-//        try{  
-//            //1) Create and start connection  
-//            InitialContext ctx=new InitialContext();  
-//            QueueConnectionFactory f=(QueueConnectionFactory)ctx.lookup("myQueueConnectionFactory");  
-//            QueueConnection con=f.createQueueConnection();  
-//            con.start();  
-//            //2) create Queue session  
-//            QueueSession ses=con.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);  
-//            //3) get the Queue object  
-//            Queue t=(Queue)ctx.lookup("myQueue");  
-//            //4)create QueueReceiver  
-//            QueueReceiver receiver=ses.createReceiver(t);  
-//              
-//            //5) create listener object  
-//            MyListener listener=new MyListener();  
-//              
-//            //6) register the listener object with receiver  
-//            receiver.setMessageListener(listener);  
-//              
-//            System.out.println("Receiver1 is ready, waiting for messages...");  
-//            System.out.println("press Ctrl+c to shutdown...");
-//        }catch(Exception e){System.out.println(e);}
-//    }
-//    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.userID=null;
@@ -181,7 +154,7 @@ public class AppServlet extends HttpServlet {
                 out.println("<input type='submit' name='login' value='Logout'>");
                 out.println("</form>");
                 out.println("<br>");
-                out.println("<h1>Genaral Announcement</h1>");
+                out.println("<h1>General Announcement</h1>");
                 try {
                     ArrayList<String> result = (ArrayList<String>) this.getAnnounce();
                     for (String e : result) {
@@ -197,7 +170,7 @@ public class AppServlet extends HttpServlet {
                 }
                 
                 out.println("<br>");
-                out.println("<h1>Spical Announcement</h1>");
+                out.println("<h1>Special Announcement</h1>");
                 try {
                     ArrayList<String> result = (ArrayList<String>) this.getAnnounce();
                     for (String e : result) {
