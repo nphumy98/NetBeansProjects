@@ -77,7 +77,7 @@ public class AnnouncementWebService {
            System.out.println("table is not existed");
             // Step 4: Creating a new STUDENTDB table in DMSDB
             String sqlQuery = "CREATE TABLE "+tableName + " (announcementID INT PRIMARY KEY," +
-            " target VARCHAR(20), topic VARCHAR(20), body VARCHAR(20))";
+            " target VARCHAR(50), topic VARCHAR(50), body VARCHAR(50))";
             int resultDB = statement.executeUpdate(sqlQuery);
             if(resultDB == 0)
             System.out.println("Announcement Table is created");
